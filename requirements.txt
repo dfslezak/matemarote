@@ -1,0 +1,12 @@
+django<1.6
+
+# Helpers
+-e git+https://github.com/SmileyChris/django-mailer-2.git#egg=django_mailer
+
+django-admin-tools
+django-extensions
+South
+django-debug-toolbar
+sorl-thumbnail
+django-template-repl
+django-ttag
