@@ -10,3 +10,5 @@ django-debug-toolbar
 sorl-thumbnail
 django-template-repl
 django-ttag
+
+pil
