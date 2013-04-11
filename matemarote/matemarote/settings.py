@@ -101,6 +101,9 @@ INSTALLED_APPS = (
     'django_mailer',
     'template_repl',
     'sorl.thumbnail',
+
+    # My APPS
+    'users',
 )
 
 # A sample logging configuration. The only tangible logging
