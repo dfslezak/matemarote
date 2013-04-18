@@ -12,3 +12,5 @@ django-template-repl
 django-ttag
 
 pil
+
+python-graph-core
