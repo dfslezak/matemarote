@@ -105,6 +105,7 @@ INSTALLED_APPS = (
 
     # My APPS
     'users',
+    'games',
 )
 
 # A sample logging configuration. The only tangible logging
