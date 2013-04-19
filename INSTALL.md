@@ -7,6 +7,8 @@ https://github.com/SmileyChris/django-mailer-2/blob/master/docs/usage.txt#L63
 This server is intended to be installed using virtualenv. For installing python packages in the virtual environment, a requirements.txt files is provided.
 Install pip, virtualenv and virtualenvwrapper. In Ubuntu:
 	sudo apt-get install python-pip python-virtualenv virtualenvwrapper
+Also install python-dev:
+	sudo apt-get install python-dev
 After installation, create a new virtualenv using mkvirtualenv.
 Enable virtualenv running:
 	workon <virtual env>
