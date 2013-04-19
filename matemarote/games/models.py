@@ -10,17 +10,32 @@ class GameRevision(models.Model):
     version = models.IPAddressField()
     creation_date = models.DateTimeField()
     previous_version = models.ForeignKey('self',null=True)
+
+class GameFlowAttribute(models.Model):
+    class Meta:
+        abstract = True
+
+class GameFlowRule(models.Model):
+    DEPENDENCY = 1
     
-class GameFlowNode(models.Model):
-    def clean(self):
-        level_diff = [((self.skill_level - xxx.skill_level) == 1) for xxx in self.previous_level_dep.objects.all()]
-        print level_diff
-        if False in level_diff:
-            raise ValidationError(u'%s is not an even number' % value)
-        
+    RULE_TYPE_CHOICES = (
+        (DEPENDENCY, 'Dependency'),
+        )
+    
+    rule_type = models.IntegerField(choices=RULE_TYPE_CHOICES)
+    class Meta:
+        abstract = True
+
+class GameFlowNode(models.Model):        
     game_revision = models.ForeignKey(GameRevision)
     skill_level = models.IntegerField()
-    previous_level_dep = models.ManyToManyField('self')
+    attributes = models.ManyToManyField(GameFlowAttribute)
+    rules = models.ManyToManyField(GameFlowRule)
+    
+class GameFlowRule_GameDep(GameFlowRule):
+    rule_type = DEPENDENCY
+    previous_nodes = models.ManyToManyField(GameFlowNode)
+
     
 #class GameFlow(models.Model):
     
