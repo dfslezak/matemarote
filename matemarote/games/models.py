@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 class Game(models.Model):
     name = models.CharField(max_length=255)
@@ -11,32 +11,39 @@ class GameRevision(models.Model):
     creation_date = models.DateTimeField()
     previous_version = models.ForeignKey('self',null=True)
 
-class GameFlowAttribute(models.Model):
-    class Meta:
-        abstract = True
-
 class GameFlowRule(models.Model):
-    DEPENDENCY = 1
+    game_revision = models.ForeignKey(GameRevision)
     
-    RULE_TYPE_CHOICES = (
-        (DEPENDENCY, 'Dependency'),
-        )
-    
-    rule_type = models.IntegerField(choices=RULE_TYPE_CHOICES)
-    class Meta:
-        abstract = True
-
+    def lock_game(self,game_flow_status):
+        return False
+        
 class GameFlowNode(models.Model):        
     game_revision = models.ForeignKey(GameRevision)
     skill_level = models.IntegerField()
-    attributes = models.ManyToManyField(GameFlowAttribute)
-    rules = models.ManyToManyField(GameFlowRule)
-    
-class GameFlowRule_GameDep(GameFlowRule):
-    rule_type = DEPENDENCY
+    #attributes = models.ManyToManyField(GameFlowAttribute)
+    #rules = models.ManyToManyField(GameFlowRule)
+
+class GameFlowRule_GameFullDep(GameFlowRule):
+    #rule = models.ForeignKey(GameFlowRule)
     previous_nodes = models.ManyToManyField(GameFlowNode)
 
+    def lock_game(self,game_flow_status):
+        return False
+
+class GameFlow(models.Model):
+    #root_node = models.ForeignKey(GameFlowNode)
+    nodes = models.ManyToManyField(GameFlowNode)
+
+class GameFlowStatus(models.Model):
+    user = models.OneToOneField(User)
+
+class GameFlowNodeStatus(models.Model):
+    game_flow_status = models.ForeignKey(GameFlowStatus)
+    node = models.ForeignKey(GameFlowNode)
+    completion = models.FloatField(default=0.0)
+    total_time_played = models.FloatField(default=0.0)
+    last_play_timestamp = models.DateTimeField(null=True)
+    last_play_totaltime = models.FloatField(default=0.0)
+
     
-#class GameFlow(models.Model):
-    
-#    xml_graph = models.TextField()
+        
