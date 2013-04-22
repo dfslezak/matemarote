@@ -36,6 +36,11 @@ class GameFlow(models.Model):
 
 class GameFlowStatus(models.Model):
     user = models.OneToOneField(User)
+    
+    total_time_played = models.FloatField(default=0.0)
+    last_play_timestamp = models.DateTimeField(null=True)
+    last_play_totaltime = models.FloatField(default=0.0)
+    total_sessions = models.IntegerField(default=0)    
 
 class GameFlowNodeStatus(models.Model):
     game_flow_status = models.ForeignKey(GameFlowStatus)
@@ -44,6 +49,6 @@ class GameFlowNodeStatus(models.Model):
     total_time_played = models.FloatField(default=0.0)
     last_play_timestamp = models.DateTimeField(null=True)
     last_play_totaltime = models.FloatField(default=0.0)
-
+    total_sessions = models.IntegerField(default=0)
     
         
