@@ -9,3 +9,12 @@ class UserProfile(models.Model):
     siblingnumber = models.PositiveIntegerField(_("Sibling number"),default=0);
     siblingorder = models.PositiveIntegerField(_("Sibling order (1 being the oldest)"),default=0);
     avatar = models.ImageField(_("Avatar"),upload_to='avatares',default='avatares/pepe.gif');
+
+
+class Program(models.Model):
+	name = models.CharField(max_length=150)
+	language = models.SmallIntegerField(_("Language"),choices=[(1,_("Spanish")),(2,_("English"))])
+	
+	parent = models.ForeignKey('self', null=True)
+	gameflow = models.ForeignKey('GameFlow', null=True)
+	
