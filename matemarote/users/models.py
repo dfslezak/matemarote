@@ -10,6 +10,7 @@ class UserProfile(models.Model):
     siblingorder = models.PositiveIntegerField(_("Sibling order (1 being the oldest)"),default=0);
     avatar = models.ImageField(_("Avatar"),upload_to='avatares',default='avatares/pepe.gif');
 
+	program = models.ForeignKey('Program')
 
 class Program(models.Model):
 	name = models.CharField(max_length=150)
