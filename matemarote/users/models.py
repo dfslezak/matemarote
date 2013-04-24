@@ -1,4 +1,5 @@
 from django.utils.translation import ugettext as _
+from django.conf.global_settings import LANGUAGES
 from django.db import models
 
 # Create your models here.
@@ -14,7 +15,8 @@ class UserProfile(models.Model):
 
 class Program(models.Model):
 	name = models.CharField(max_length=150)
-	language = models.SmallIntegerField(_("Language"),choices=[(1,_("Spanish")),(2,_("English"))])
+	#language = models.SmallIntegerField(_("Language"),choices=[(1,_("Spanish")),(2,_("English"))])
+	language = models.CharField(choices=LANGUAGES)
 	
 	parent = models.ForeignKey('self', null=True)
 	gameflow = models.ForeignKey('GameFlow', null=True)
