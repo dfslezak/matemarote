@@ -10,6 +10,19 @@ class SimpleTest(TestCase):
         """
         self.assertEqual(1 + 1, 2)
 
+class GameFixtureLoadTest(TestCase):
+    fixtures = ['user-testdata.json','games-testdata.json']
+    
+    def test_fixture_files(self):
+        g = Game.objects.all()
+        gr = GameRevision.objects.all()
+        
+        self.assertEqual(len(g), 2)
+        self.assertEqual(len(gr), 1)
+        self.assertEqual(gr[0].game, g[0])
+        self.assertNotEqual(gr[0].game, g[1])
+        
+        
 class GameFlowTest(TestCase):
     fixtures = ['user-testdata.json']
     
