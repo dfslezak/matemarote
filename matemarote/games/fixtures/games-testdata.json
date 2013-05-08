@@ -23,6 +23,24 @@
       "previous_version": null
     }
   },
-  
- 
+  {
+    "model": "games.GameRevision",
+    "pk": 2,
+    "fields": {
+      "game": 2,
+      "version": "1.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 3,
+    "fields": {
+      "game": 2,
+      "version": "2.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": 2
+    }
+  }
 ]

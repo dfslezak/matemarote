@@ -18,9 +18,12 @@ class GameFixtureLoadTest(TestCase):
         gr = GameRevision.objects.all()
         
         self.assertEqual(len(g), 2)
-        self.assertEqual(len(gr), 1)
+        self.assertEqual(len(gr), 3)
         self.assertEqual(gr[0].game, g[0])
+        self.assertEqual(gr[1].game, g[1])
         self.assertNotEqual(gr[0].game, g[1])
+        self.assertEqual(gr[2].game, g[1])
+        self.assertEqual(gr[2].previous_version, gr[1])
         
         
 class GameFlowTest(TestCase):
