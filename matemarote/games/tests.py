@@ -25,6 +25,20 @@ class GameFixtureLoadTest(TestCase):
         self.assertEqual(gr[2].game, g[1])
         self.assertEqual(gr[2].previous_version, gr[1])
         
+class GameFlowFixtureLoadTest(TestCase):
+    fixtures = ['user-testdata.json','games-testdata.json','gameflow-testdata.json']
+    
+    def test_fixture_files(self):
+        g = Game.objects.all()
+        gr = GameRevision.objects.all()
+        gfn = GameFlowNode.objects.all()
+        gf = GameFlow.objects.all()
+        
+        self.assertEqual(len(gfn), 2)
+        self.assertEqual(gfn[0].game_revision, gr[0])
+        self.assertEqual(gfn[1].game_revision, gr[1])
+        
+        gf[0].list_games_per_skill()
         
 class GameFlowTest(TestCase):
     fixtures = ['user-testdata.json']

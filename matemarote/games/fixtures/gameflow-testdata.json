@@ -1,0 +1,31 @@
+[
+  {
+    "model": "games.GameFlowNode",
+    "pk": 1,
+    "fields": {
+        "game_revision": 1, 
+        "skill_level": 1}
+  },
+  {
+    "model": "games.GameFlowNode",
+    "pk": 2,
+    "fields": {
+        "game_revision": 2, 
+        "skill_level": 2}
+  },
+  {
+    "model": "games.GameFlowRule_GameFullDep",
+    "pk": 1,
+    "fields": {
+        "previous_nodes": [1]
+    }
+  },
+  {
+    "model": "games.GameFlow",
+    "pk": 1,
+    "fields": {
+        "nodes": [1,2]
+    }
+  }
+
+]

@@ -33,6 +33,25 @@ class GameFlowRule_GameFullDep(GameFlowRule):
 class GameFlow(models.Model):
     #root_node = models.ForeignKey(GameFlowNode)
     nodes = models.ManyToManyField(GameFlowNode)
+    
+    def list_games_per_skill(self):
+        gfr = GameFlowRule_GameFullDep.objects.create(pk=3,game_revision=GameRevision.objects.all()[0])
+        gfr.save()
+        gfr.previous_nodes.add(GameFlowNode.objects.all()[0])
+        gfr.save()       
+        
+        level_map = {}
+        for n in self.nodes.all():
+            enabled = True
+            rules = GameFlowRule.objects.filter(game_revision=n.game_revision)
+            print [name in rules.__dict__]
+                
+            if n.skill_level in level_map:
+                level_map[n.skill_level].append(n.game_revision.pk)
+            else:
+                level_map[n.skill_level] = [n.game_revision.pk]
+        print level_map
+            
 
 class GameFlowStatus(models.Model):
     user = models.OneToOneField(User)
