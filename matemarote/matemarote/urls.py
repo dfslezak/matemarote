@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'matemarote.views.home', name='home'),
     # url(r'^matemarote/', include('matemarote.foo.urls')),
+    url(r'^gameflow/', 'games.views.gameflow'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -37,8 +37,21 @@ class GameFlowFixtureLoadTest(TestCase):
         self.assertEqual(len(gfn), 2)
         self.assertEqual(gfn[0].game_revision, gr[0])
         self.assertEqual(gfn[1].game_revision, gr[1])
+           
+    def test_list_games(self):
+        gfr = GameFlowRule_GameFullDep.objects.create(pk=3,game_revision=GameRevision.objects.all()[0])
+        gfr.save()
+        gfr.previous_nodes.add(GameFlowNode.objects.all()[0])
+        gfr.save()
         
-        gf[0].list_games_per_skill()
+        gf = GameFlow()
+        gf.save()
+        gf.nodes.add(GameFlowNode.objects.all()[0])
+        gf.save()
+        self.assertEqual(str(gf.list_games_per_skill(None)),'{1: [(1, True)]}')
+        self.assertEqual(str(GameFlow.objects.all()[0].list_games_per_skill(None)),'{1: [(1, True)], 2: [(2, True)]}')
+
+
         
 class GameFlowTest(TestCase):
     fixtures = ['user-testdata.json']
@@ -77,7 +90,7 @@ class GameFlowTest(TestCase):
         gfr1.previous_nodes.add(gfn1)
         gfr1.save()
 
-        print "Number of rules %s" % (str(GameFlowRule.objects.count()), )
+        #print "Number of rules %s" % (str(GameFlowRule.objects.count()), )
         #gfn2.rules.add(gfr1)
         
         #print serializers.serialize("xml", GameFlowNode.objects.all())
@@ -87,6 +100,6 @@ class GameFlowTest(TestCase):
         gf.nodes.add(gfn1)
         gf.nodes.add(gfn2)
         #gf.verify_level_dependency(gfn2)        
-        print gfn2.id
+        #print gfn2.id
         
         self.assertEqual(1 + 1, 2)

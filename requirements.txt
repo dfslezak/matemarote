@@ -14,3 +14,4 @@ django-ttag
 pil
 
 python-graph-core
+django-model-utils
