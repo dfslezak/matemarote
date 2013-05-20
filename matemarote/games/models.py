@@ -12,7 +12,6 @@ class GameRevision(models.Model):
     creation_date = models.DateTimeField()
     previous_version = models.ForeignKey('self',null=True)
 
-        
 class GameFlowNode(models.Model):        
     game_revision = models.ForeignKey(GameRevision)
     skill_level = models.IntegerField()
@@ -70,7 +69,6 @@ class GameFlow(models.Model):
                 level_map[n.skill_level] = [(n.game_revision.pk,enabled)]
         return level_map
 
-
 class GameFlowStatus(models.Model):
     user = models.OneToOneField(User)
     
@@ -88,5 +86,3 @@ class GameFlowNodeStatus(models.Model):
     last_play_timestamp = models.DateTimeField(null=True)
     last_play_totaltime = models.FloatField(default=0.0)
     total_sessions = models.IntegerField(default=0)
-    
-        

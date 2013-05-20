@@ -55,7 +55,6 @@ class GameFlowRulesTest(TestCase):
         gfs = GameFlowNodeStatus.objects.get(node=gfn0).game_flow_status
         self.assertEqual(gfr[0].lock_game(gfs),False)
 
-        
 class GameFlowTest(TestCase):
     fixtures = ['user-testdata.json']
     
