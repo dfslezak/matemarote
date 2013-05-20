@@ -1,0 +1,75 @@
+[
+  {
+    "model": "games.GameFlowNode",
+    "pk": 1,
+    "fields": {
+        "game_revision": 1, 
+        "skill_level": 1}
+  },
+  {
+    "model": "games.GameFlowNode",
+    "pk": 2,
+    "fields": {
+        "game_revision": 2, 
+        "skill_level": 2}
+  },
+  {
+    "model": "games.GameFlowNode",
+    "pk": 3,
+    "fields": {
+        "game_revision": 3, 
+        "skill_level": 2}
+  },
+  
+  {"pk": 1, "model": "games.gameflowrule", "fields": {"game_flow_node": 2}}, 
+  {"pk": 2, "model": "games.gameflowrule", "fields": {"game_flow_node": 3}}, 
+
+  {
+    "model": "games.GameFlowRule_GameFullDep",
+    "pk": 1,
+    "fields": {
+        "previous_nodes": [1]
+    }
+  },
+  {
+    "model": "games.GameFlowRule_GamePartialCompletionDep",
+    "pk": 2,
+    "fields": {
+        "completion_threshold": 50,
+        "previous_nodes": [1]
+    }
+  },
+  {
+    "model": "games.GameFlow",
+    "pk": 1,
+    "fields": {
+        "nodes": [1,2,3]
+    }
+  },
+  
+  {
+    "model": "games.GameFlowStatus",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "1970-01-01",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },
+  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 1,
+    "fields": {
+        "game_flow_status": 1,
+        "node": 1,
+        "game_finished": "False",
+        "completion": 60,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "1970-01-01",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  }
+]

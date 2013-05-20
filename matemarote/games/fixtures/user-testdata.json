@@ -1,0 +1,42 @@
+[
+  {
+    "model": "auth.User",
+    "pk": 1,
+    "fields": {
+        "username": "dfslezak", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$gpeOyJ12QxXR$ppdwhBP3iDMXu4S1CmOD41zlqrUPvwZmzp8lYcAtxhg=", 
+        "email": "", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },  
+  {
+    "model": "users.Program",
+    "pk": 1,
+    "fields": {
+      "game_flow": 1
+    }
+  },
+
+  {
+    "model": "users.UserProfile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "birthdate": "1900-1-1",
+      "gender": 1,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 1,
+      "game_flow_status": 1
+    }
+  }
+]

@@ -2,7 +2,11 @@ from django.utils.translation import ugettext as _
 from django.conf.global_settings import LANGUAGES
 from django.db import models
 from django.contrib.auth.models import User
+from games.models import GameFlow,GameFlowStatus
 
+class Program(models.Model):
+    game_flow = models.ForeignKey(GameFlow)
+    
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -14,6 +18,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(_("Avatar"),upload_to='avatares',null=True);
 
     program = models.ForeignKey('Program')
+    game_flow_status = models.ForeignKey(GameFlowStatus)
 
 class Program(models.Model):
     name = models.CharField(max_length=150)
