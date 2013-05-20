@@ -24,6 +24,7 @@ class Program(models.Model):
     name = models.CharField(max_length=150)
     #language = models.SmallIntegerField(_("Language"),choices=[(1,_("Spanish")),(2,_("English"))])
     language = models.CharField(choices=LANGUAGES)
-
     parent = models.ForeignKey('self', null=True)
+    entry_url = models.CharField(max_length=150)
+    
     gameflow = models.ForeignKey('GameFlow', null=True)
