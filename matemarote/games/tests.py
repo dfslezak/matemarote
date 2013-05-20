@@ -34,23 +34,26 @@ class GameFlowFixtureLoadTest(TestCase):
         gfn = GameFlowNode.objects.all()
         gf = GameFlow.objects.all()
         
-        self.assertEqual(len(gfn), 2)
+        self.assertEqual(len(gfn), 3)
         self.assertEqual(gfn[0].game_revision, gr[0])
         self.assertEqual(gfn[1].game_revision, gr[1])
            
     def test_list_games(self):
-        gfr = GameFlowRule_GameFullDep.objects.create(pk=3,game_revision=GameRevision.objects.all()[0])
-        gfr.save()
-        gfr.previous_nodes.add(GameFlowNode.objects.all()[0])
-        gfr.save()
-        
-        gf = GameFlow()
-        gf.save()
-        gf.nodes.add(GameFlowNode.objects.all()[0])
-        gf.save()
-        self.assertEqual(str(gf.list_games_per_skill(None)),'{1: [(1, True)]}')
-        self.assertEqual(str(GameFlow.objects.all()[0].list_games_per_skill(None)),'{1: [(1, True)], 2: [(2, True)]}')
+        gf = GameFlow.objects.all()[0]
+        self.assertEqual(str(gf.list_games_per_skill(None)),'{1: [(1, True)], 2: [(2, True), (3, True)]}')
 
+class GameFlowRulesTest(TestCase):
+    fixtures = ['user-testdata.json','games-testdata.json','gameflow-testdata.json']
+    
+    def test_partial_completion(self):
+        gf = GameFlow.objects.all()[0]
+        gfn = GameFlowNode.objects.all()[2]
+        gfr = GameFlowRule.objects.filter(game_flow_node=gfn).select_subclasses()
+        self.assertEqual(str(gfr),'[<GameFlowRule_GamePartialCompletionDep: GameFlowRule_GamePartialCompletionDep object>]')
+
+        gfn0 = GameFlowNode.objects.all()[0]
+        gfs = GameFlowNodeStatus.objects.get(node=gfn0).game_flow_status
+        self.assertEqual(gfr[0].lock_game(gfs),False)
 
         
 class GameFlowTest(TestCase):
@@ -85,7 +88,7 @@ class GameFlowTest(TestCase):
         gfn1.save()
         gfn2.save()
 
-        gfr1 = GameFlowRule_GameFullDep(game_revision=gr2)#,rule_type=GameFlowRule.DEPENDENCY)        
+        gfr1 = GameFlowRule_GameFullDep(game_flow_node=gfn2)#,rule_type=GameFlowRule.DEPENDENCY)        
         gfr1.save()
         gfr1.previous_nodes.add(gfn1)
         gfr1.save()
