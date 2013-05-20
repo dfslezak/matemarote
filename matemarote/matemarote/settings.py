@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     # My APPS
     'users',
     'games',
+    'web_frontend',
 )
 
 # A sample logging configuration. The only tangible logging

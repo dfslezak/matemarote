@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -9,6 +11,8 @@ urlpatterns = patterns('',
     # url(r'^matemarote/', include('matemarote.foo.urls')),
     url(r'^gameflow/', 'games.views.gameflow'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login',{'template_name': 'login_local.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'template_name': 'logout.html'}),
+    url(r'^web/$', 'web_frontend.views.web'),
     
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
