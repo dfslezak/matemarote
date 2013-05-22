@@ -15,6 +15,7 @@ TIME_ZONE = 'America/Argentina/Buenos_Aires'
 LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
+SITE_NAME='Mate Marote'
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -91,6 +92,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -102,10 +104,12 @@ INSTALLED_APPS = (
     'django_mailer',
     'template_repl',
     'sorl.thumbnail',
+    'registration',
 
     # My APPS
     'users',
     'games',
+    'web_frontend',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -136,6 +140,7 @@ LOGGING = {
         },
     }
 }
+
 
 try:
     from settings_local import *

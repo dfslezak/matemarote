@@ -15,3 +15,4 @@ pil
 
 python-graph-core
 django-model-utils
+https://bitbucket.org/eire1130/django-registration/get/tip.tar.gz
