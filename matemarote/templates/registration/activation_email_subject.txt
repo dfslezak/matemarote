@@ -1,0 +1,1 @@
+Activate your Mate Marote account - you have {{ expiration_days }} days!
