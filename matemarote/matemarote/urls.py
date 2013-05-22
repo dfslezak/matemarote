@@ -2,7 +2,6 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from users.models import UserProfile
 import registration
 from registration.forms import RegistrationFormUniqueEmail
 
@@ -17,6 +16,7 @@ urlpatterns = patterns('',
     #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'template_name': 'logout.html'}),
     url(r'^$', 'web_frontend.views.web'),
 
+    url(r'^accounts/profile/$', 'web_frontend.views.edit_profile'),
     url(r'^accounts/register/$', 'registration.views.register',
     {'form_class': RegistrationFormUniqueEmail,
      'backend': 'registration.backends.default.DefaultBackend'},       

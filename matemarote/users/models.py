@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext as _
 from django.conf.global_settings import LANGUAGES
 from django.db import models
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from games.models import GameFlow,GameFlowStatus
 
@@ -28,3 +29,8 @@ class Program(models.Model):
     entry_url = models.CharField(max_length=150)
     
     gameflow = models.ForeignKey('GameFlow', null=True)
+
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['birthdate','gender','handedness','siblingnumber','siblingorder','avatar']
