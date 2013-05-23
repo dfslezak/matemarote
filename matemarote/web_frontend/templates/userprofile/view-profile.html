@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block title%}{% trans 'Mate Marote - View profile' %}{% endblock %}
+{% block head%}{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>{% trans 'User profile' %}</h1>
+  
+    <p class="text-center">
+    {% trans 'Birthdate' %}:{{ profile.birthdate.value|default_if_none:""|date:"SHORT_DATE_FORMAT" }}
+    </p>
+    <p>
+      {% trans 'Gender' %}:
+      {{ profile.gender.value }}
+    </p>
+    <!--<p>
+      <label for="id_handedness">Handedness:</label>
+      {% if form.handedness.errors %}
+        <p class="text-error">{{ form.handedness.errors.as_text }}</p>
+      {% endif %}
+      {{ form.handedness }}
+    </p>
+    <p>
+      <label for="id_siblingnumber">Sibling Number:</label>
+      {% if form.siblingnumber.errors %}
+        <p class="text-error">{{ form.siblingnumber.errors.as_text }}</p>
+      {% endif %}
+      {{ form.siblingnumber }}
+    </p>
+    <p>
+      <label for="id_siblingorder">Sibling Order (1 being the oldest):</label>
+      {% if form.siblingorder.errors %}
+        <p class="text-error">{{ form.siblingorder.errors.as_text }}</p>
+      {% endif %}
+      {{ form.siblingorder }}
+    <p>
+    </p>
+      <label for="id_avatar">Avatar:</label>
+      {% if form.avatar.errors %}
+        <p class="text-error">{{ form.avatar.errors.as_text }}</p>
+      {% endif %}
+      {{ form.avatar }}
+    </p>
+-->
+    </div>
+
+{% endblock %}

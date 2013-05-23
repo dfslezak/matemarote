@@ -1,0 +1,72 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{% static "jquery/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" %}">
+    <script src={% static "jquery/jquery-1.9.1.js" %}></script>
+    <script src={% static "jquery/jquery-ui-1.10.3/ui/jquery.ui.core.js" %}></script>
+    <script src={% static "jquery/jquery-ui-1.10.3/ui/jquery.ui.widget.js" %}></script>
+    <script src={% static "jquery/jquery-ui-1.10.3/ui/jquery.ui.datepicker.js" %}></script>    
+    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
+       <style>
+        footer {
+            color: #666;
+            background: #000;
+            padding: 17px 0 18px 0;
+            border-top: 1px solid #000;
+        }
+        footer a {
+            color: #999;
+        }
+        footer a:hover {
+            color: #efefef;
+        }
+    </style>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+  <div class="navbar navbar-static-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">Mate Marote</a>
+ 
+      {% if user.is_authenticated %}
+        <ul class="nav pull-right">
+            <li>
+                <p class="navbar-text">{% trans "Logged in as" %} {{ user.username }} </p>
+                </li>
+                <a class="btn btn-small btn-primary" href="/accounts/logout/">{% trans "Logout" %}</a>
+        </ul>
+      {% else %}
+        <ul class="nav pull-right">
+            <li><p class="navbar-text"><a href="/accounts/password/reset">{% trans "forgot password?" %}</a></p></li>
+            <li>
+                <form class="navbar-form" action="/accounts/login/?next=/" method="post" id="login-form">{% csrf_token %}
+                    <input type="text" class="span2" placeholder="Login" id="id_username" name="username" />
+                    <input type="password" class="span2" placeholder="Password" id="id_password" name="password" />
+                    <button type="submit" class="btn btn-success">Login</button>
+                </form>
+            </li>
+            
+            <li><p class="span2"><a href="/accounts/register" class="btn btn-primary">Register</a></p></li>
+        </ul>
+      {% endif %}
+    </div>
+
+  </div>
+  </div>
+
+    {% block content %}{% endblock %}        
+    <div id="footer">
+    <div class="container">
+                <p class="text-center">Creado por el <a href="http://neurociencia.df.uba.ar" >Laboratorio de Neurociencia Integrativa</a>. Cualquier consulta escribir a: <a href="http://www.google.com/recaptcha/mailhide/d?k=01YGwJoZjAHaW6z65_a_oaiw==&amp;c=MjF1vx7s_oQuEOXupcBdBof_2DrKl1mnsz79C40XXrk=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501YGwJoZjAHaW6z65_a_oaiw\75\75\46c\75MjF1vx7s_oQuEOXupcBdBof_2DrKl1mnsz79C40XXrk\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">mate...@gmail.com</a></p> 
+    </div>
+    </div>
+</body>
+</html>

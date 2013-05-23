@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     #url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',{'template_name': 'logout.html'}),
     url(r'^$', 'web_frontend.views.web'),
 
-    url(r'^accounts/profile/$', 'web_frontend.views.edit_profile'),
+    url(r'^accounts/profile/$', 'web_frontend.views.view_profile'),
+    url(r'^accounts/profile/edit$', 'web_frontend.views.edit_profile'),
     url(r'^accounts/register/$', 'registration.views.register',
     {'form_class': RegistrationFormUniqueEmail,
      'backend': 'registration.backends.default.DefaultBackend'},       
@@ -27,6 +28,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    url(r'^my_admin/jsi18n', 'django.views.i18n.javascript_catalog'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
 )
