@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load static %}
+
+{% block title%}{% trans 'Mate Marote - View profile' %}{% endblock %}
+{% block head%}{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>{% trans 'User profile' %}</h1>
+  
+  <div class="row">
+      <div class="span4">
+        <p class="text">
+        {% trans 'Birthdate' %}: {{ profile.birthdate|default_if_none:""|date:"SHORT_DATE_FORMAT" }}
+        </p>
+        <p>
+        {% trans 'Gender' %}: {{ profile.get_gender_display }}
+        </p>
+        <p>
+          {% trans 'Handedness' %}: {{ profile.get_handedness_display }}
+        </p>
+        <p>
+          {% trans 'Sibling Number' %}: {{ profile.siblingnumber }}
+        </p>
+        <p>
+          {% trans 'Sibling Order (1 being the oldest)' %}: {{ profile.siblingorder }}
+        <p>
+      </div>
+      <div class="span4">
+        {% if profile.avatar %}
+          <img src="{{ profile.avatar.url }}" />
+        {% endif %}
+      </div>
+  </div>
+  <div class="row">
+      <div class="span4">
+        <p class="text-left"><a href="edit" class="btn btn-primary">{% trans 'Edit Profile' %}</a></p>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
