@@ -34,15 +34,16 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             
-            template = 'userprofile/view-profile.html'
             profile = request.user.get_profile()
             c['profile'] = profile
+            ret_val = redirect('/accounts/profile',c)
 
         else:
             #print form.errors
             #print form.__dict__
             c['form'] = form
             template = 'userprofile/edit-profile.html'
+            ret_val = render_to_response(template, c)
 
     else: # Show form for edition
         #print '---------- SHOW FOR EDITION -----------'
@@ -55,6 +56,7 @@ def edit_profile(request):
         #print 'Form: ', form.as_p()
         c['form'] = form
         template = 'userprofile/edit-profile.html'
+        ret_val = render_to_response(template, c)
 
-    return render_to_response(template, c)
+    return ret_val
     
