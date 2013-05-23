@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load staticfiles %}
-
+{% load static %}
 
 {% block title%}{% trans 'Mate Marote - View profile' %}{% endblock %}
 {% block head%}{% endblock %}
@@ -11,42 +11,35 @@
 <div class="container">
     <h1>{% trans 'User profile' %}</h1>
   
-    <p class="text-center">
-    {% trans 'Birthdate' %}:{{ profile.birthdate.value|default_if_none:""|date:"SHORT_DATE_FORMAT" }}
-    </p>
-    <p>
-      {% trans 'Gender' %}:
-      {{ profile.gender.value }}
-    </p>
-    <!--<p>
-      <label for="id_handedness">Handedness:</label>
-      {% if form.handedness.errors %}
-        <p class="text-error">{{ form.handedness.errors.as_text }}</p>
-      {% endif %}
-      {{ form.handedness }}
-    </p>
-    <p>
-      <label for="id_siblingnumber">Sibling Number:</label>
-      {% if form.siblingnumber.errors %}
-        <p class="text-error">{{ form.siblingnumber.errors.as_text }}</p>
-      {% endif %}
-      {{ form.siblingnumber }}
-    </p>
-    <p>
-      <label for="id_siblingorder">Sibling Order (1 being the oldest):</label>
-      {% if form.siblingorder.errors %}
-        <p class="text-error">{{ form.siblingorder.errors.as_text }}</p>
-      {% endif %}
-      {{ form.siblingorder }}
-    <p>
-    </p>
-      <label for="id_avatar">Avatar:</label>
-      {% if form.avatar.errors %}
-        <p class="text-error">{{ form.avatar.errors.as_text }}</p>
-      {% endif %}
-      {{ form.avatar }}
-    </p>
--->
-    </div>
+  <div class="row">
+      <div class="span4">
+        <p class="text">
+        {% trans 'Birthdate' %}: {{ profile.birthdate|default_if_none:""|date:"SHORT_DATE_FORMAT" }}
+        </p>
+        <p>
+        {% trans 'Gender' %}: {{ profile.get_gender_display }}
+        </p>
+        <p>
+          {% trans 'Handedness' %}: {{ profile.get_handedness_display }}
+        </p>
+        <p>
+          {% trans 'Sibling Number' %}: {{ profile.siblingnumber }}
+        </p>
+        <p>
+          {% trans 'Sibling Order (1 being the oldest)' %}: {{ profile.siblingorder }}
+        <p>
+      </div>
+      <div class="span4">
+        {% if profile.avatar %}
+          <img src="{{ profile.avatar.url }}" />
+        {% endif %}
+      </div>
+  </div>
+  <div class="row">
+      <div class="span4">
+        <p class="text-left"><a href="edit" class="btn btn-primary">{% trans 'Edit Profile' %}</a></p>
+      </div>
+  </div>
+</div>
 
 {% endblock %}

@@ -39,7 +39,7 @@
       {% if user.is_authenticated %}
         <ul class="nav pull-right">
             <li>
-                <p class="navbar-text">{% trans "Logged in as" %} {{ user.username }} </p>
+                <p class="navbar-text">{% trans "Logged in as" %} <a href="/accounts/profile/">{{ user.username }}</a> </p>
                 </li>
                 <a class="btn btn-small btn-primary" href="/accounts/logout/">{% trans "Logout" %}</a>
         </ul>
