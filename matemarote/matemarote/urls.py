@@ -13,6 +13,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^gameflow/', 'games.views.gameflow'),
     url(r'^$', 'web_frontend.views.web'),
+    
+    url(r'^games/', 'web_frontend.views.serve_game'),
+    
 
     url(r'^accounts/profile/$', 'web_frontend.views.view_profile'),
     url(r'^accounts/profile/edit$', 'web_frontend.views.edit_profile'),
