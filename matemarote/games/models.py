@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from model_utils.managers import InheritanceManager
 
 class Game(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.SlugField(unique=True,null=False,blank=False)
     description = models.TextField()
 
 class GameRevision(models.Model):
