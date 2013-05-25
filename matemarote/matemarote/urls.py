@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^gameflow/', 'games.views.gameflow'),
     url(r'^$', 'web_frontend.views.web'),
     
-    url(r'^games/', 'web_frontend.views.serve_game'),
+    #url(r'^games/', 'web_frontend.views.serve_game'),
     
 
     url(r'^accounts/profile/$', 'web_frontend.views.view_profile'),
@@ -33,3 +33,23 @@ urlpatterns = patterns('',
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += patterns('',
+    #url(r'^(?P<game_name>.*)/login/', game_login, name="game_login"),
+    #url(r'^(?P<game_name>.*)/logout/', game_logout, name="game_logout"),
+    #url(r'^(?P<game_name>.*)/new_play/', new_play, name="new_play"),
+    #url(r'^(?P<game_name>.*)/log_action/', log_action, name="log_action"),
+    #url(r'^(?P<game_name>.*)/set_score/', set_score, name="set_score"),
+    #url(r'^(?P<game_name>.*)/get_score/', get_score, name="get_score"),
+    #url(r'^(?P<game_name>.*)/save_seconds_played/', save_seconds_played, name="save_seconds_played"),
+    #url(r'^(?P<game_name>.*)/game_finished/', game_finished, name="game_finished"),
+    url(r'^games/(?P<game_name>.*)/(?P<game_version>.*)/res/(?P<resource_path>.*)',
+        'web_frontend.views.serve_game_resource', name="serve_game_static"),
+    url(r'^games/(?P<game_name>.*)/(?P<game_version>.*)/game_file/(?P<game_file_path>.*)',
+        'web_frontend.views.serve_game_file', name="serve_game_file"),
+    #url(r'^(?P<game_name>.*)/school_end_stage/', school_end_stage, name="school_end_stage"),
+    url(r'^games/(?P<game_name>.*)/(?P<game_version>.*)/$', 'web_frontend.views.serve_game',
+        {'page_path':'index.html'}, name="serve_game_index")
+    #url(r'^/games/(?P<game_name>.*)/(?P<game_version>.*)/(?P<page_path>.*)',
+    #    'web_frontend.views.serve_game_page', name="serve_game_page")        
+)
