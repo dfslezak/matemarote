@@ -1,15 +1,21 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.http import Http404
 
 from django.shortcuts import render_to_response,redirect
 from django.core.context_processors import csrf
+from django.views.static import serve
+from django.conf import settings
+
+import os
+import sys
+
 from users.models import UserProfile,UserProfileForm
 from games.models import Game,GameRevision
-from django.views.static import serve
-from os import path
+from web_frontend.models import WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
-import sys 
+
 
 def web(request):
     c = RequestContext(request)
@@ -63,20 +69,14 @@ def edit_profile(request):
     return render_to_response(template, c)
     
 @login_required
-def serve_game(request):
+def serve_game(request, game_name, game_version, page_path):
     c = RequestContext(request)
     c.update(csrf(request))
-    
+    print c
     template = 'games/serve_game.html'
 
-    # Check URL and get game
-    url = request.get_full_path()
-    url_tokens = url.split('/')
-    try:
-        ind = url_tokens.index('games')
-        game_name = url_tokens[ind+1]
-        game_version = url_tokens[ind+2]
-        
+    # Check game name and version
+    try:        
         selected_game = Game.objects.get(name=game_name)
         selected_game_revision = GameRevision.objects.get(game=selected_game, version=game_version)        
 
@@ -104,12 +104,14 @@ def serve_game(request):
 
 
 def _serve_game_path(request, directory, filename):
-    if not path.exists(settings.MEDIA_ROOT+directory+filename):
-        raise Http404("File Not Found")
-    return serve(request, filename, document_root=settings.MEDIA_ROOT+directory)
+    full_dir = os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,directory)
+    full_path = os.path.join(full_dir,filename)
+    if not os.path.exists(full_path):
+        raise Http404("File Not Found: %s" % (full_path))
+    return serve(request, filename, document_root=full_dir)
 
-def serve_game_resource(request, game_name, resource_path):
-    return _serve_game_path(request, request.game.resource_path, resource_path)
+def serve_game_resource(request, game_name, game_version, resource_path):
+    return _serve_game_path(request, os.path.join(game_name,game_version,WEBGAMES_RES_DIR), resource_path)
 
-def serve_game_file(request, game_name, game_file_path):
-    return _serve_game_path(request, request.game.game_file_path, game_file_path)
+def serve_game_file(request, game_name, game_version, game_file_path):
+    return _serve_game_path(request, os.path.join(game_name,game_version,WEBGAMES_GAMEFILES_DIR), game_file_path)

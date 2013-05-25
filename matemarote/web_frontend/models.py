@@ -1,6 +1,12 @@
 from django.db import models
 from games.models import GameRevision
 from django.conf import settings
+import os
+
+WEBGAMES_DIR = 'games'
+WEBGAMES_RES_DIR = 'res'
+WEBGAMES_GAMEFILES_DIR = 'game_files'
+WEBGAMES_SCREENSHOTS_DIR = 'screenshots'
 
 class WebGameRevision(models.Model):
     game_revision = models.OneToOneField(GameRevision)
@@ -8,23 +14,23 @@ class WebGameRevision(models.Model):
     
     @property
     def static_dir(self):
-        return 'games/%s/%s' % (self.game_revision.game.name,self.game_revision.version)
+        return os.path.join(WEBGAMES_DIR,self.game_revision.game.name,self.game_revision.version)
     
     @property
     def resource_path(self):
-        return "%s/res/" % self.static_dir
+        return os.path.join(self.static_dir, WEBGAMES_RES_DIR)
 
-    @property
-    def page_path(self):
-        return "%s/pages/" % self.static_dir
+    # @property
+    #def page_path(self):
+    #    return os.path.join(self.static_dir, WEBGAMES_PAGES_DIR)
 
     @property
     def game_file_path(self):
-        return "%s/game_files/" % self.static_dir
+        return os.path.join(self.static_dir, WEBGAMES_GAMEFILES_DIR)
     
     @property
     def screenshots_path(self):
-        return "%s/screenshots/" % self.static_dir
+        return os.path.join(self.static_dir, WEBGAMES_SCREENSHOTS_DIR)
                     
     def _flatten_walk(self, subdir, include_dirs = False):
         '''Returns a flat list of file paths for all files in the given subdir, all relative to subdir'''
@@ -64,6 +70,7 @@ class WebGameRevision(models.Model):
         return ''
             
     def create_directory_structure(self):
-        for dirname in self.resource_path, self.page_path, self.game_file_path, self.screenshots_path:
+        #for dirname in self.resource_path, self.page_path, self.game_file_path, self.screenshots_path:
+        for dirname in self.resource_path, self.game_file_path, self.screenshots_path:
             d = os.path.join(settings.MEDIA_ROOT, dirname)
             if not os.path.exists(d): os.makedirs(d)
