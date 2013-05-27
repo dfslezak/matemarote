@@ -10,19 +10,31 @@
 
 <div class="container">
 
-<ul>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{% trans "Skill" %}</th>
+      <th>{% trans "Games" %}</th>
+    </tr>
+  </thead>
+  <tbody>
 {% for sk in skill_list %}
-    <li><ul>
-        {% for g in sk %}
-
-        <li>{{ g }}</li>
-
-        {% endfor %}
-    </ul></li>
-
+    <tr><td>{{ forloop.counter }}</td><td>
+        <div class="row">
+            {% for g in sk %}
+            <div class="span2">
+                {% if g.0.webgamerevision %}
+                <a href="{{ g.0.webgamerevision.static_dir }}">{{ g.0.game.name }}</a>
+                {% else %}
+                Game not available
+                {% endif %}
+            </div>
+            {% endfor %}    
+        </div>
+    </td></tr>
 {% endfor %}
-</ul>
-
+  </tbody>    
+</table>
 </div>
 
 {% endblock %}

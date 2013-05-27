@@ -3,7 +3,7 @@ from games.models import GameRevision
 from django.conf import settings
 import os
 
-WEBGAMES_DIR = 'games'
+WEBGAMES_DIR = '/games'
 WEBGAMES_RES_DIR = 'res'
 WEBGAMES_GAMEFILES_DIR = 'game_files'
 WEBGAMES_SCREENSHOTS_DIR = 'screenshots'

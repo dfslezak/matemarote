@@ -64,9 +64,9 @@ class GameFlow(models.Model):
                     enabled = enabled and not r.lock_game(game_flow_status)
                 
             if n.skill_level in level_map:
-                level_map[n.skill_level].append((n.game_revision.pk,enabled))
+                level_map[n.skill_level].append((n.game_revision,enabled))
             else:
-                level_map[n.skill_level] = [(n.game_revision.pk,enabled)]
+                level_map[n.skill_level] = [(n.game_revision,enabled)]
         return level_map
 
 class GameFlowStatus(models.Model):

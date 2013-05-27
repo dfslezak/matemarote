@@ -16,6 +16,7 @@ def gameflow(request):
     sk_list = []
     
     for s in sorted(sk.keys()):
+        print sk[s]
         sk_list.append(sk[s])
     c['skill_list'] = sk_list
     

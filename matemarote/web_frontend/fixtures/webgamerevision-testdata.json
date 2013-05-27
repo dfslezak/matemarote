@@ -1,0 +1,18 @@
+[
+  {
+    "model": "web_frontend.WebGameRevision",
+    "pk": 1,
+    "fields": {
+      "game_revision": 1,
+      "created": "1970-01-01"
+    }
+  },
+  {
+    "model": "web_frontend.WebGameRevision",
+    "pk": 2,
+    "fields": {
+      "game_revision": 2,
+      "created": "1970-01-01"
+    }
+  }
+]
