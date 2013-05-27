@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block title%}{% trans 'Mate Marote' %}{% endblock %}
+{% block head%}{% endblock %}
+{% block content %}
+
+<div class="container">
+
+<ul>
+{% for sk in skill_list %}
+    <li><ul>
+        {% for g in sk %}
+
+        <li>{{ g }}</li>
+
+        {% endfor %}
+    </ul></li>
+
+{% endfor %}
+</ul>
+
+</div>
+
+{% endblock %}
