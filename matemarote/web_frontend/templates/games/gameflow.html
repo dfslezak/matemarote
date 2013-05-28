@@ -24,9 +24,13 @@
             {% for g in sk %}
             <div class="span2">
                 {% if g.0.webgamerevision %}
-                <a href="{{ g.0.webgamerevision.static_dir }}">{{ g.0.game.name }}</a>
+                    {% if g.1 %}
+                        <a href="{{ g.0.webgamerevision.static_dir }}" class="tooltip1" data-placement="bottom" data-html="true" data-title="{{ g.2 }}">{{ g.0.webgamerevision.display_name }}</a>
+                    {% else %}
+                        <a href="#" class="tooltip1" data-placement="bottom" data-html="true" data-title="{{ g.2 }}">{% trans 'Game locked' %}</a>
+                    {% endif %}
                 {% else %}
-                Game not available
+                    {% trans 'Game not available for web' %}
                 {% endif %}
             </div>
             {% endfor %}    
@@ -37,4 +41,10 @@
 </table>
 </div>
 
+{% endblock %}
+
+{% block endscripts %}
+<script>
+$('.tooltip1').tooltip()
+</script>
 {% endblock %}

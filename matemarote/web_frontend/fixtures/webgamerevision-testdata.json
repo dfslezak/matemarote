@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
       "game_revision": 1,
-      "created": "1970-01-01"
+      "created": "1970-01-01",
+      "display_name": "Test Game 1",
+      "tooltip_description": "Tooltip description 1"
     }
   },
   {
@@ -12,7 +14,9 @@
     "pk": 2,
     "fields": {
       "game_revision": 2,
-      "created": "1970-01-01"
+      "created": "1970-01-01",
+      "display_name": "Test Game 2",
+      "tooltip_description": "Tooltip description 2"
     }
   }
 ]

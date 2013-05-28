@@ -8,10 +8,21 @@ WEBGAMES_RES_DIR = 'res'
 WEBGAMES_GAMEFILES_DIR = 'game_files'
 WEBGAMES_SCREENSHOTS_DIR = 'screenshots'
 
+TOOLTIP_TEMPLATE = "<h2>%s</h2><p class='text'>%s</p>"
+
+
 class WebGameRevision(models.Model):
     game_revision = models.OneToOneField(GameRevision)
     created = models.DateTimeField(auto_now_add=True)
     
+    display_name = models.CharField(max_length=255)
+    tooltip_description = models.TextField()
+    
+    def get_tooltip(self,game_flow_status):
+        tooltip =  TOOLTIP_TEMPLATE % (self.display_name, self.tooltip_description)
+        
+        return tooltip
+        
     @property
     def static_dir(self):
         return os.path.join(WEBGAMES_DIR,self.game_revision.game.name,self.game_revision.version)

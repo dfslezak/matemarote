@@ -67,6 +67,32 @@ def edit_profile(request):
         template = 'userprofile/edit-profile.html'
 
     return render_to_response(template, c)
+
+@login_required
+def gameflow(request):
+    c = RequestContext(request)
+
+    user = request.user.get_profile()
+    gf = user.get_gameflow()
+    
+    skills = gf.list_games_per_skill(user.game_flow_status)
+    skills_list = []
+    
+    for skill in sorted(skills.keys()):
+        single_skill_list = []
+        for (gr,e) in skills[skill]:
+            try:
+                tooltip = gr.webgamerevision.get_tooltip(gf)
+            except ObjectDoesNotExist:
+                tooltip = ''
+            single_skill_list.append([gr,e,tooltip])
+        skills_list.append(single_skill_list)
+    print skills_list
+    c['skill_list'] = skills_list
+    
+    
+    
+    return render_to_response('games/gameflow.html', c)
     
 @login_required
 def serve_game(request, game_name, game_version, page_path):

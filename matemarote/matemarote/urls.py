@@ -11,7 +11,7 @@ from django.conf.urls.static import static
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^gameflow/', 'games.views.gameflow'),
+    url(r'^gameflow/', 'web_frontend.views.gameflow'),
     url(r'^$', 'web_frontend.views.web'),
     
     #url(r'^games/', 'web_frontend.views.serve_game'),
