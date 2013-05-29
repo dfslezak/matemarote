@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block title%}{% trans 'Mate Marote' %}{% endblock %}
+{% block head%}{% endblock %}
+{% block content %}
+
+<div class="container">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{% trans "Skill" %}</th>
+      <th>{% trans "Games" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for sk in skill_list %}
+    <tr><td>{{ forloop.counter }}</td><td>
+        <div class="row">
+            {% for g in sk %}
+            <div class="span2">
+                {% if g.0.webgameflownode %}
+                    {% if g.1 %}
+                        <a href="{{ g.0.pk }}" class="tooltip1" data-placement="bottom" data-html="true" data-title="{{ g.2 }}">{{ g.0.webgameflownode.display_name }}</a>
+                    {% else %}
+                        <a href="#" class="tooltip1" data-placement="bottom" data-html="true" data-title="{{ g.2 }}">{% trans 'Game locked' %}</a>
+                    {% endif %}
+                {% else %}
+                    {% trans 'Game not available for web' %}
+                {% endif %}
+            </div>
+            {% endfor %}    
+        </div>
+    </td></tr>
+{% endfor %}
+  </tbody>    
+</table>
+</div>
+
+{% endblock %}
+
+{% block endscripts %}
+<script>
+$('.tooltip1').tooltip()
+</script>
+{% endblock %}
