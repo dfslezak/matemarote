@@ -15,7 +15,8 @@ from users.models import UserProfile,UserProfileForm
 from games.models import Game,GameRevision,GameFlowNode
 from web_frontend.models import WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
-
+class GameNotEnabled(Exception):
+    pass
 
 def web(request):
     c = RequestContext(request)
@@ -109,20 +110,12 @@ def serve_game(request, game_flow_node):
         if not gfn.game_flow == gf:
             raise ObjectDoesNotExist()
         
-        en = gfn.is_enabled()
+        if not gfn.is_enabled(user.game_flow_status):
+            raise GameNotEnabled()
         #selected_game = Game.objects.get(name=game_name)
         selected_game_revision = gfn.game_revision
-
-        # Check permission based on gameflow.
-        game_list = gf.list_games_per_skill(user.game_flow_status)
-        print game_list
         
-        for sk in game_list.keys():
-            level = game_list[sk]
-            game_tuple = [game for (game,enabled) in level if game == selected_game_revision.pk and enabled]
-            
-            if len(game_tuple)>0:
-                print 'Found enabled game at skill level', sk, ' GAME: ', game_tuple[0]
+        print 'Found enabled game at skill level', gfn.skill_level, ' GAME: ', gfn.webgameflownode.display_name
                 
     except IndexError as e:
         print "Unexpected error:", e
@@ -133,6 +126,9 @@ def serve_game(request, game_flow_node):
     except ValueError as e:
         print "Unexpected error:", e
         template = 'games/wrong_url.html'
+    except GameNotEnabled as e:
+        print "Unexpected error:", e
+        template = 'games/game_disabled.html'
     
     return render_to_response(template,c)
 
