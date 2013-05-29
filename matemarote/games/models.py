@@ -12,17 +12,28 @@ class GameRevision(models.Model):
     creation_date = models.DateTimeField()
     previous_version = models.ForeignKey('self',null=True)
 
-class GameFlowNode(models.Model):        
-    game_revision = models.ForeignKey(GameRevision)
-    skill_level = models.IntegerField()
-
 class GameFlowRule(models.Model):
     objects = InheritanceManager()
     
-    game_flow_node = models.ForeignKey(GameFlowNode)
+    game_flow_node = models.ForeignKey('GameFlowNode')
     
     def lock_game(self,gf_status):
         return False
+
+class GameFlowNode(models.Model):        
+    game_flow = models.ForeignKey('GameFlow')
+    game_revision = models.ForeignKey(GameRevision)
+    skill_level = models.IntegerField()
+    
+    def is_enabled(self,game_flow_status):
+        enabled = True
+        rules = GameFlowRule.objects.filter(game_flow_node=self).select_subclasses()
+        for r in rules:
+            enabled = enabled and not r.lock_game(game_flow_status)
+            
+        return enabled
+
+
 
 class GameFlowRule_GameFullDep(GameFlowRule):
     #rule = models.ForeignKey(GameFlowRule)
@@ -51,22 +62,18 @@ class GameFlowRule_GamePartialCompletionDep(GameFlowRule):
         return lock
 
 class GameFlow(models.Model):
-    #root_node = models.ForeignKey(GameFlowNode)
-    nodes = models.ManyToManyField(GameFlowNode)
     
     def list_games_per_skill(self, game_flow_status):       
         level_map = {}
-        for n in self.nodes.all():
+        for n in GameFlowNode.objects.filter(game_flow=self):
             enabled = True
             if game_flow_status is not None:
-                rules = GameFlowRule.objects.filter(game_flow_node=n).select_subclasses()
-                for r in rules:
-                    enabled = enabled and not r.lock_game(game_flow_status)
+                enabled = n.is_enabled(game_flow_status)
                 
             if n.skill_level in level_map:
-                level_map[n.skill_level].append((n.game_revision,enabled))
+                level_map[n.skill_level].append((n,enabled))
             else:
-                level_map[n.skill_level] = [(n.game_revision,enabled)]
+                level_map[n.skill_level] = [(n,enabled)]
         return level_map
 
 class GameFlowStatus(models.Model):

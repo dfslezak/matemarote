@@ -12,7 +12,7 @@ import os
 import sys
 
 from users.models import UserProfile,UserProfileForm
-from games.models import Game,GameRevision
+from games.models import Game,GameRevision,GameFlowNode
 from web_frontend.models import WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
 
@@ -80,35 +80,40 @@ def gameflow(request):
     
     for skill in sorted(skills.keys()):
         single_skill_list = []
-        for (gr,e) in skills[skill]:
+        for (gfn,e) in skills[skill]:
             try:
-                tooltip = gr.webgamerevision.get_tooltip(gf)
+                print gfn.__dict__
+                tooltip = gfn.webgameflownode.get_tooltip(gf)
             except ObjectDoesNotExist:
                 tooltip = ''
-            single_skill_list.append([gr,e,tooltip])
+            single_skill_list.append([gfn,e,tooltip])
         skills_list.append(single_skill_list)
     print skills_list
     c['skill_list'] = skills_list
     
-    
-    
     return render_to_response('games/gameflow.html', c)
     
 @login_required
-def serve_game(request, game_name, game_version, page_path):
+def serve_game(request, game_flow_node):
     c = RequestContext(request)
     c.update(csrf(request))
-    print c
+    
     template = 'games/serve_game.html'
 
     # Check game name and version
     try:        
-        selected_game = Game.objects.get(name=game_name)
-        selected_game_revision = GameRevision.objects.get(game=selected_game, version=game_version)        
-
-        # Check permission based on gameflow.
         user = request.user.get_profile()
         gf = user.get_gameflow()
+        
+        gfn = GameFlowNode.objects.get(pk=game_flow_node)
+        if not gfn.game_flow == gf:
+            raise ObjectDoesNotExist()
+        
+        en = gfn.is_enabled()
+        #selected_game = Game.objects.get(name=game_name)
+        selected_game_revision = gfn.game_revision
+
+        # Check permission based on gameflow.
         game_list = gf.list_games_per_skill(user.game_flow_status)
         print game_list
         
@@ -123,6 +128,9 @@ def serve_game(request, game_name, game_version, page_path):
         print "Unexpected error:", e
         template = 'games/wrong_url.html'
     except ObjectDoesNotExist as e:
+        print "Unexpected error:", e
+        template = 'games/wrong_url.html'
+    except ValueError as e:
         print "Unexpected error:", e
         template = 'games/wrong_url.html'
     

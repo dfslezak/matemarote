@@ -1,5 +1,5 @@
 from django.db import models
-from games.models import GameRevision
+from games.models import GameRevision,GameFlowNode
 from django.conf import settings
 import os
 
@@ -11,8 +11,8 @@ WEBGAMES_SCREENSHOTS_DIR = 'screenshots'
 TOOLTIP_TEMPLATE = "<h2>%s</h2><p class='text'>%s</p>"
 
 
-class WebGameRevision(models.Model):
-    game_revision = models.OneToOneField(GameRevision)
+class WebGameFlowNode(models.Model):
+    game_flow_node = models.OneToOneField(GameFlowNode)
     created = models.DateTimeField(auto_now_add=True)
     
     display_name = models.CharField(max_length=255)
@@ -25,7 +25,7 @@ class WebGameRevision(models.Model):
         
     @property
     def static_dir(self):
-        return os.path.join(WEBGAMES_DIR,self.game_revision.game.name,self.game_revision.version)
+        return os.path.join(WEBGAMES_DIR,self.game_flow_node.game_revision.game.name,self.game_flow_node.game_revision.version)
     
     @property
     def resource_path(self):
