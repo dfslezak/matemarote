@@ -5,7 +5,47 @@
 
 
 {% block title%}{% trans 'Mate Marote' %}{% endblock %}
-{% block head%}{% endblock %}
+{% block head%}
+<script type="text/javascript">
+        $.games = {
+                'playtime_timer': null, 
+                'game_start': function(update_interval = 10000){
+                    this.start_time = new Date();
+                    this.playtime_timer = $.timer(this.save_seconds_played,update_interval);
+                    return;
+                    },
+                'is_authenticated': {% if user.is_authenticated %}true{% else %}false{% endif %},
+                'start_time': -1,
+                'seconds_played': {{ seconds_played }},
+                'state': [{% for s in state %} {{ s }}{% if not forloop.last %},{% endif %}{% endfor %}],
+                'gamefile_list': [{% for f in game_files %}'{{ f }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+                'get_gamefile' : function(gamefile_name){
+                        var ret;
+                        $.ajax({
+                          type: "GET",
+                          url: 'game_file/'+gamefile_name,
+                          dataType: "json",
+                                async: false,
+                                error: function(err){
+                                        alert("Game file invalido "+gamefile_name);
+                                },
+                                success: function(json){
+                                        ret = json;
+                                }
+                        });
+                return ret;
+                },
+                'save_seconds_played' : function(){
+                        time_sec_played = new Date();
+                        temp_save_seconds_played = this.seconds_played+Math.round((time_sec_played.getTime()-this.start_time.getTime())/1000);
+                        $.ajax({url:'{% url save_seconds_played game.name %}', dataType: "json",data:{'seconds_played':temp_save_seconds_played}});
+                },
+                'game_finished' : function(){
+                        $.ajax({url:'{% url game_finished game.name %}', dataType: "json",data:{}});
+                }
+        };
+</script>
+{% endblock %}
 {% block content %}
 
 <div class="container">
