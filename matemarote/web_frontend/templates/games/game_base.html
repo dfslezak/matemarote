@@ -6,8 +6,26 @@
 
 {% block title %}{% trans 'Mate Marote' %}{% endblock %}
 {% block head %}
-
+<style>
+#loading {
+background:#000 url({% static 'images/ajax-loader.gif' %}) no-repeat center center;
+height: 50px;
+width: 50px;
+position: fixed;
+left: 50%;
+top: 50%;
+margin: -25px 0 0 -25px;
+z-index: 1000;
+}
+</style>
 <script type="text/javascript">
+
+        // Wait for window load
+        jQuery(window).load(function(){
+        jQuery('#loading').fadeOut(3000);
+        jQuery('#main').show("slow");
+        });
+        
         $.games = {
                 'playtime_timer': null, 
                 'game_start': function(update_interval){
@@ -55,7 +73,9 @@
 {% endblock %}
 {% block content %}
 
-<div class="container">
+<div id="loading"></div>
+
+<div class="container" style="display:none;" id="main">
 
 {% block gameblock %}{% endblock %}
 
