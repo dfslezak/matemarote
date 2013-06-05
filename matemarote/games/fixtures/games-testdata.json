@@ -3,7 +3,7 @@
     "model": "games.Game",
     "pk": 1,
     "fields": {
-        "name": "test_game1", 
+        "name": "avioncito", 
         "description": "test_game1_description"}
   },
   {

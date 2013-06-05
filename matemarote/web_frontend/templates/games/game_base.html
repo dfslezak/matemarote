@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block title %}{% trans 'Mate Marote' %}{% endblock %}
+{% block head %}
+
+<link href="{% static "games.css" %}" rel="stylesheet" media="screen">
+
+<script type="text/javascript">
+
+        // Wait for window load
+        jQuery(window).load(function(){
+        jQuery('#loading').fadeOut(1500);
+        jQuery('#container').show("slow");
+        });
+        
+        $.games = {
+                'playtime_timer': null, 
+                'game_start': function(update_interval){
+                    update_interval = typeof update_interval !== 'undefined' ? update_interval : 1000;
+                    now_date = new Date()
+                    this.start_time = now_date.getTime();
+                    this.playtime_timer = $.timer(this.save_seconds_played,update_interval,true);
+                    return;
+                    },
+                //'is_authenticated': {% if user.is_authenticated %}true{% else %}false{% endif %},
+                'start_time': -1,
+                'seconds_played': {{ seconds_played }},
+                //'state': [{% for s in state %} {{ s }}{% if not forloop.last %},{% endif %}{% endfor %}],
+                //'gamefile_list': [{% for f in game_files %}'{{ f }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+                'get_gamefile' : function(gamefile_name){
+                        var ret;
+                        $.ajax({
+                          type: "GET",
+                          url: 'game_file/'+gamefile_name,
+                          dataType: "json",
+                                async: false,
+                                error: function(err){
+                                        alert("Game file invalido "+gamefile_name);
+                                },
+                                success: function(json){
+                                        ret = json;
+                                }
+                        });
+                return ret;
+                },
+                'save_seconds_played' : function(){
+                        time_sec_played = new Date();
+                        temp_save_seconds_played = this.seconds_played+Math.round((time_sec_played.getTime()-this.start_time)/1000);
+                        this.seconds_played = temp_save_seconds_played
+                        //$.ajax({url:'// { //% url save_seconds_played game.name  //% //}', dataType: "json",data:{'seconds_played':temp_save_seconds_played}});
+                        
+                },
+                'game_finished' : function(){
+                        //$.ajax({url:'// { //% url game_finished game.name //% //}', dataType: "json",data:{}});
+                }
+        };
+</script>
+{% block gamehead %}{% endblock %}
+
+{% endblock %}
+{% block content %}
+
+<div class="game-container">
+    <div id="loading"></div>
+
+    <div class="game-style">
+        {% block gameblock %}{% endblock %}
+
+    </div>
+</div>
+
+{% endblock %}

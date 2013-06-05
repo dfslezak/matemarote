@@ -3,7 +3,7 @@ from games.models import GameRevision,GameFlowNode
 from django.conf import settings
 import os
 
-WEBGAMES_DIR = '/games'
+WEBGAMES_DIR = 'games'
 WEBGAMES_RES_DIR = 'res'
 WEBGAMES_GAMEFILES_DIR = 'game_files'
 WEBGAMES_SCREENSHOTS_DIR = 'screenshots'
@@ -25,7 +25,7 @@ class WebGameFlowNode(models.Model):
         
     @property
     def static_dir(self):
-        return os.path.join(WEBGAMES_DIR,self.game_flow_node.game_revision.game.name,self.game_flow_node.game_revision.version)
+        return os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,self.game_flow_node.game_revision.game.name,"v%s" % self.game_flow_node.game_revision.version)
     
     @property
     def resource_path(self):

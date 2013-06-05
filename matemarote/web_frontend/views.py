@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
-from django.http import Http404
+from django.template import RequestContext, Template
+from django.http import Http404,HttpResponse
 
 from django.shortcuts import render_to_response,redirect
 from django.core.context_processors import csrf
@@ -116,7 +116,16 @@ def serve_game(request, game_flow_node):
         selected_game_revision = gfn.game_revision
         
         print 'Found enabled game at skill level', gfn.skill_level, ' GAME: ', gfn.webgameflownode.display_name
-                
+        print settings.MEDIA_ROOT
+        template = os.path.join(gfn.webgameflownode.static_dir, 'pages/juego.html')
+        
+        
+        c['seconds_played'] = 0
+        
+        t = Template(open(template,'r').read())
+        tr = t.render(c)
+        
+        return HttpResponse(tr)
     except IndexError as e:
         print "Unexpected error:", e
         template = 'games/wrong_url.html'
@@ -140,8 +149,10 @@ def _serve_game_path(request, directory, filename):
         raise Http404("File Not Found: %s" % (full_path))
     return serve(request, filename, document_root=full_dir)
 
-def serve_game_resource(request, game_name, game_version, resource_path):
-    return _serve_game_path(request, os.path.join(game_name,game_version,WEBGAMES_RES_DIR), resource_path)
+def serve_game_resource(request, game_flow_node, resource_path):
+    gfn = GameFlowNode.objects.get(pk=game_flow_node)
+    return _serve_game_path(request, gfn.webgameflownode.resource_path, resource_path)
 
-def serve_game_file(request, game_name, game_version, game_file_path):
-    return _serve_game_path(request, os.path.join(game_name,game_version,WEBGAMES_GAMEFILES_DIR), game_file_path)
+def serve_game_file(request, game_flow_node, game_file_path):
+    gfn = GameFlowNode.objects.get(pk=game_flow_node)
+    return _serve_game_path(request, gfn.webgameflownode.game_file_path, game_file_path)
