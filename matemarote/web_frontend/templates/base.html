@@ -6,8 +6,14 @@
   <head>
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <!-- Bootstrap -->
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "sticky.css" %}" rel="stylesheet" media="screen">
+    
+    <link href="{% static 'bootstrap-responsive.css' %} rel="stylesheet">
     <link rel="stylesheet" href="{% static "jquery/jquery-ui-1.10.3/themes/base/jquery.ui.all.css" %}">
     <script src={% static "jquery/jquery-1.9.1.js" %}></script>
     <script src={% static "jquery/jquery-ui-1.10.3/ui/jquery.ui.core.js" %}></script>
@@ -18,25 +24,13 @@
     <script src={% static "jquery/jquery.svg.package-1.4.5/jquery.svg.js" %}></script>
 
     <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
-       <style>
-        footer {
-            color: #666;
-            background: #000;
-            padding: 17px 0 18px 0;
-            border-top: 1px solid #000;
-        }
-        footer a {
-            color: #999;
-        }
-        footer a:hover {
-            color: #efefef;
-        }
-    </style>
+
     {% block head %}{% endblock %}
   </head>
   <body>
-  <div class="navbar navbar-static-top navbar-inverse">
-  <div class="navbar-inner">
+  <div id="wrap">
+    <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
     <div class="container">
       <a class="brand" href="/">Mate Marote</a>
  
@@ -66,13 +60,17 @@
   </div>
   </div>
 
-    {% block content %}{% endblock %}        
-    <div id="footer">
-    <div class="container">
-                <p class="text-center">Creado por el <a href="http://neurociencia.df.uba.ar" >Laboratorio de Neurociencia Integrativa</a>. Cualquier consulta escribir a: <a href="http://www.google.com/recaptcha/mailhide/d?k=01YGwJoZjAHaW6z65_a_oaiw==&amp;c=MjF1vx7s_oQuEOXupcBdBof_2DrKl1mnsz79C40XXrk=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501YGwJoZjAHaW6z65_a_oaiw\75\75\46c\75MjF1vx7s_oQuEOXupcBdBof_2DrKl1mnsz79C40XXrk\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">mate...@gmail.com</a></p> 
-    </div>
-    </div>
-    
+  
+    {% block content %}{% endblock %}                          
+                    
+    <div id="push"></div>
+
+  </div>
+  <div id="footer"><div class="container">
+    <p class="muted credit">Creado por el <a href="http://neurociencia.df.uba.ar" >Laboratorio de Neurociencia Integrativa</a>. Cualquier consulta escribir a: <a href="http://www.google.com/recaptcha/mailhide/d?k=01YGwJoZjAHaW6z65_a_oaiw==&amp;c=MjF1vx7s_oQuEOXupcBdBof_2DrKl1mnsz79C40XXrk=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501YGwJoZjAHaW6z65_a_oaiw\75\75\46c\75MjF1vx7s_oQuEOXupcBdBof_2DrKl1mnsz79C40XXrk\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">mate...@gmail.com</a></p> </footer>
+  </div></div>
+
+  
     {% block endscripts %}{% endblock %}        
 </body>
 </html>

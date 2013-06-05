@@ -6,24 +6,15 @@
 
 {% block title %}{% trans 'Mate Marote' %}{% endblock %}
 {% block head %}
-<style>
-#loading {
-background:#000 url({% static 'images/ajax-loader.gif' %}) no-repeat center center;
-height: 50px;
-width: 50px;
-position: fixed;
-left: 50%;
-top: 50%;
-margin: -25px 0 0 -25px;
-z-index: 1000;
-}
-</style>
+
+<link href="{% static "games.css" %}" rel="stylesheet" media="screen">
+
 <script type="text/javascript">
 
         // Wait for window load
         jQuery(window).load(function(){
-        jQuery('#loading').fadeOut(3000);
-        jQuery('#main').show("slow");
+        jQuery('#loading').fadeOut(1500);
+        jQuery('#container').show("slow");
         });
         
         $.games = {
@@ -73,12 +64,13 @@ z-index: 1000;
 {% endblock %}
 {% block content %}
 
-<div id="loading"></div>
+<div class="game-container">
+    <div id="loading"></div>
 
-<div class="container" style="display:none;" id="main">
+    <div class="game-style">
+        {% block gameblock %}{% endblock %}
 
-{% block gameblock %}{% endblock %}
-
+    </div>
 </div>
 
 {% endblock %}
