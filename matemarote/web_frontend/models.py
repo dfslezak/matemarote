@@ -1,5 +1,6 @@
 from django.db import models
-from games.models import GameRevision,GameFlowNode
+from django.forms import ModelForm, Textarea
+from games.models import Game, GameRevision,GameFlowNode
 from django.conf import settings
 import os
 
@@ -9,6 +10,17 @@ WEBGAMES_GAMEFILES_DIR = 'game_files'
 WEBGAMES_SCREENSHOTS_DIR = 'screenshots'
 
 TOOLTIP_TEMPLATE = "<h2>%s</h2><p class='text'>%s</p>"
+
+class GameForm(ModelForm):
+    class Meta:
+        model = Game
+        fields = ['name','description']
+        widgets = {'description': Textarea}
+
+class GameRevisionForm(ModelForm):
+    class Meta:
+        model = GameRevision
+        fields = ['version','creation_date','previous_version']
 
 
 class WebGameFlowNode(models.Model):

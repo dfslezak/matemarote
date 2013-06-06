@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 from django.template import RequestContext, Template
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 
 from django.shortcuts import render_to_response,redirect
 from django.core.context_processors import csrf
@@ -13,7 +13,7 @@ import sys
 
 from users.models import UserProfile,UserProfileForm
 from games.models import Game,GameRevision,GameFlowNode
-from web_frontend.models import WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
+from web_frontend.models import GameForm,GameRevisionForm,WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
 class GameNotEnabled(Exception):
     pass
@@ -69,6 +69,54 @@ def edit_profile(request):
 
     return render_to_response(template, c)
 
+@permission_required('games.administrator')
+def gamelist(request):
+    c = RequestContext(request)
+   
+    games = Game.objects.all()
+    c['games'] = games
+    c['add_game_form'] = GameForm()
+    c['add_game_revision_form'] = GameRevisionForm()
+    
+    return render_to_response('games/gamelist.html',c)
+
+@permission_required('games.administrator')
+def add_game(request):
+    c = RequestContext(request)
+
+    if request.method == 'POST':
+        print request.POST
+        form = GameForm(data=request.POST) 
+        print form
+        if form.is_valid():
+            n = form.cleaned_data['name']
+            d = form.cleaned_data['description']
+            g = Game(name=n,description=d)
+            g.save()
+        else: 
+            print 'invalid form'
+            
+    return HttpResponseRedirect('/games/list/') # Redirect after POST
+
+@permission_required('games.administrator')
+def add_game_revision(request):
+    c = RequestContext(request)
+
+    if request.method == 'POST':
+        print request.POST
+        form = GameForm(data=request.POST) 
+        print form
+        if form.is_valid():
+            n = form.cleaned_data['name']
+            d = form.cleaned_data['description']
+            g = Game(name=n,description=d)
+            g.save()
+        else: 
+            print 'invalid form'
+            
+    return HttpResponseRedirect('/games/list/') # Redirect after POST
+
+    
 @login_required
 def gameflow(request):
     c = RequestContext(request)

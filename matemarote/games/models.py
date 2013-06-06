@@ -1,11 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from model_utils.managers import InheritanceManager
+from django.forms import ModelForm, Textarea
 
 class Game(models.Model):
     name = models.SlugField(unique=True,null=False,blank=False)
     description = models.TextField()
+    
+    #def getGameRevisions(self):
+    #        return GameRevision.objects.filter(game = self)
+    
+    #game_revisions = property(getGameRevisions)
 
+    
 class GameRevision(models.Model):
     game = models.ForeignKey(Game)
     version = models.IPAddressField()
