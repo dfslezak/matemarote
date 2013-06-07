@@ -17,7 +17,7 @@
 
         <h1>{{ g.name }}</h1>
         <p class="lead">{{ g.description }}</p>
-        <p><a href="#game-rev-add-modal" class="btn btn-success" role="button" data-toggle="modal">{% trans 'Create new version' %}</a></p>
+        <p><a href="#game-rev-add-modal" class="btn btn-success open-gamerevmodal" role="button" data-toggle="modal" data-id="{{ g.name }}">{% trans 'Create new version' %}</a></p>
         <table class="table table-striped">
         <tbody>
         {% for gr in g.gamerevision_set.all %}
@@ -53,6 +53,7 @@
         <h3 id="myModalLabel">{% trans 'Add game revision...' %}</h3>
     </div>
     <div class="modal-body">
+            <input type="hidden" value="" name="gameref"/>
             {{ add_game_revision_form.as_p }}
     </div>
     <div class="modal-footer">
@@ -65,4 +66,13 @@
 {% endblock %}
 
 {% block endscripts %}
+<script>
+$(document).on("click", ".open-gamerevmodal", function () {
+     var gameref = $(this).data('id');
+     $(".game-rev-add-modal #gameref").val( gameref);
+     // As pointed out in comments, 
+     // it is superfluous to have to manually call the modal.
+     // $('#addBookDialog').modal('show');
+});
+</script>
 {% endblock %}
