@@ -10,10 +10,11 @@ from django.conf import settings
 
 import os
 import sys
+import datetime
 
 from users.models import UserProfile,UserProfileForm
 from games.models import Game,GameRevision,GameFlowNode
-from web_frontend.models import GameForm,GameRevisionForm,WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
+from web_frontend.models import GameForm,GameRevisionForm,UploadGameRevisionForm,WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
 class GameNotEnabled(Exception):
     pass
@@ -77,12 +78,14 @@ def gamelist(request):
     c['games'] = games
     c['add_game_form'] = GameForm()
     c['add_game_revision_form'] = GameRevisionForm()
+    c['upload_game_revision_form'] = UploadGameRevisionForm()
     
     return render_to_response('games/gamelist.html',c)
 
 @permission_required('games.administrator')
 def add_game(request):
     c = RequestContext(request)
+    c.update(csrf(request))
 
     if request.method == 'POST':
         print request.POST
@@ -101,21 +104,39 @@ def add_game(request):
 @permission_required('games.administrator')
 def add_game_revision(request):
     c = RequestContext(request)
+    c.update(csrf(request))
 
     if request.method == 'POST':
         print request.POST
-        form = GameForm(data=request.POST) 
+        form = GameRevisionForm(data=request.POST) 
         print form
         if form.is_valid():
-            n = form.cleaned_data['name']
-            d = form.cleaned_data['description']
-            g = Game(name=n,description=d)
-            g.save()
+            try:
+                g = Game.objects.get(name=request.POST['gameref'])
+                v = form.cleaned_data['version']
+                cd = datetime.datetime.now()
+                pv = form.cleaned_data['previous_version']
+                gr = GameRevision(game=g,version=v,creation_date=cd,previous_version=pv)
+                gr.save()
+            except Exception as e:
+                print e
         else: 
             print 'invalid form'
+            print form.errors
             
-    return HttpResponseRedirect('/games/list/') # Redirect after POST
+    return HttpResponseRedirect(request.POST['next']) # Redirect after POST
 
+
+@permission_required('games.administrator')
+def upload_game_revision(request):
+    c = RequestContext(request)
+    c.update(csrf(request))
+
+    if request.method == 'POST':
+        print request.POST
+        print request.FILES
+            
+    return HttpResponseRedirect(request.POST['next']) # Redirect after POST
     
 @login_required
 def gameflow(request):

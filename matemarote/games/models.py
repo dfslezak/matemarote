@@ -7,6 +7,7 @@ class Game(models.Model):
     name = models.SlugField(unique=True,null=False,blank=False)
     description = models.TextField()
     
+    def __str__(self): return self.name
     #def getGameRevisions(self):
     #        return GameRevision.objects.filter(game = self)
     
@@ -17,8 +18,10 @@ class GameRevision(models.Model):
     game = models.ForeignKey(Game)
     version = models.IPAddressField()
     creation_date = models.DateTimeField()
-    previous_version = models.ForeignKey('self',null=True)
+    previous_version = models.ForeignKey('self',null=True,blank=True)
 
+    def __str__(self): return self.game.name + ' (' + str(self.version) + ')'
+    
 class GameFlowRule(models.Model):
     objects = InheritanceManager()
     

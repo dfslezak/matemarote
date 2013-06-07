@@ -1,5 +1,6 @@
+from django.utils.translation import ugettext as _
 from django.db import models
-from django.forms import ModelForm, Textarea
+from django.forms import Form,ModelForm, Textarea,FileField
 from games.models import Game, GameRevision,GameFlowNode
 from django.conf import settings
 import os
@@ -20,7 +21,13 @@ class GameForm(ModelForm):
 class GameRevisionForm(ModelForm):
     class Meta:
         model = GameRevision
-        fields = ['version','creation_date','previous_version']
+        fields = ['version','previous_version']
+    #def __init__(self, *args, **kwargs):
+        #super(GameRevisionForm, self).__init__(*args, **kwargs)
+        #self.fields['previous_version'].queryset = GameRevision.objects.filter(game=self.instance.game)
+
+class UploadGameRevisionForm(Form):
+    upload_file = FileField(label=_('Select a zip file'))
 
 
 class WebGameFlowNode(models.Model):

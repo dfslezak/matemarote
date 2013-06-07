@@ -17,13 +17,20 @@
 
         <h1>{{ g.name }}</h1>
         <p class="lead">{{ g.description }}</p>
-        <p><a href="#game-rev-add-modal" class="btn btn-success open-gamerevmodal" role="button" data-toggle="modal" data-id="{{ g.name }}">{% trans 'Create new version' %}</a></p>
+        <p><a href="#game-rev-add-modal" class="btn btn-success opengamerevmodal" role="button" data-toggle="modal" data-id="{{ g.name }}">{% trans 'Create new version' %}</a></p>
         <table class="table table-striped">
+        <thead>
+            <th>{% trans 'Version' %}</th>
+            <th>{% trans 'Previous Version' %}</th>
+            <th>{% trans 'Actions' %}</th>
+        </tbody>
+
         <tbody>
         {% for gr in g.gamerevision_set.all %}
             <tr>
                 <td>{% trans 'Version' %}: {{ gr.version }} <small>({% trans 'Created on' %} {{ gr.creation_date|date:"SHORT_DATE_FORMAT" }})</td>
-                <td><a href="#" class="btn btn-info">{% trans 'Upload version package' %}</a></td>
+                <td>{{ gr.previous_version }}</td>
+                <td><a href="#upload-files-modal" class="btn btn-info openuploadmodal" role="button" data-toggle="modal" data-gameid="{{ g.pk }}" data-gamerevid="{{ gr.pk }}">{% trans 'Upload version package' %}</a></td>
             </tr>
         {% endfor %}      
         </tbody>
@@ -53,7 +60,8 @@
         <h3 id="myModalLabel">{% trans 'Add game revision...' %}</h3>
     </div>
     <div class="modal-body">
-            <input type="hidden" value="" name="gameref"/>
+            <input type="hidden" value="/games/list/" name="next" id="id_next"/>
+            <input type="hidden" value="" name="gameref" id="id_gameref"/>
             {{ add_game_revision_form.as_p }}
     </div>
     <div class="modal-footer">
@@ -63,16 +71,38 @@
     </form>
 </div>
 
+<div id="upload-files-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameRevAddLabel" aria-hidden="true" enctype="multipart/form-data">
+    <form id="upload-files-form" method="post" action="/games/upload/">{% csrf_token %}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">{% trans 'Upload game version package' %}</h3>
+    </div>
+    <div class="modal-body">
+            <input type="hidden" value="/games/list/" name="next" id="id_next"/>
+            <input type="hidden" value="" name="upload-gameref"/>
+            <input type="hidden" value="" name="upload-gamerevref"/>
+            {{ upload_game_revision_form.as_p }}
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <input class="btn btn-primary" type="submit" value="{% trans 'Upload Game Package' %}" />
+    </div>
+    </form>
+</div>
+
 {% endblock %}
 
 {% block endscripts %}
 <script>
-$(document).on("click", ".open-gamerevmodal", function () {
+$(document).on("click", ".opengamerevmodal", function () {
      var gameref = $(this).data('id');
-     $(".game-rev-add-modal #gameref").val( gameref);
-     // As pointed out in comments, 
-     // it is superfluous to have to manually call the modal.
-     // $('#addBookDialog').modal('show');
+     $("input[name='gameref']").val( gameref);
+});
+$(document).on("click", ".openuploadmodal", function () {
+     var gameref = $(this).data('gameid');
+     var gamerevref = $(this).data('gamerevid');
+     $("input[name='upload-gameref']").val( gameref);
+     $("input[name='upload-gamerevref']").val( gamerevref);
 });
 </script>
 {% endblock %}
