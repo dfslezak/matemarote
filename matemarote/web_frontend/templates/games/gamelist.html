@@ -71,8 +71,8 @@
     </form>
 </div>
 
-<div id="upload-files-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameRevAddLabel" aria-hidden="true" enctype="multipart/form-data">
-    <form id="upload-files-form" method="post" action="/games/upload/">{% csrf_token %}
+<div id="upload-files-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameRevAddLabel" aria-hidden="true">
+    <form id="upload-files-form" method="post" action="/games/upload/" enctype="multipart/form-data">{% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">{% trans 'Upload game version package' %}</h3>

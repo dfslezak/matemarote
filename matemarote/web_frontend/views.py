@@ -11,10 +11,11 @@ from django.conf import settings
 import os
 import sys
 import datetime
+import zipfile
 
 from users.models import UserProfile,UserProfileForm
 from games.models import Game,GameRevision,GameFlowNode
-from web_frontend.models import GameForm,GameRevisionForm,UploadGameRevisionForm,WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
+from web_frontend.models import GameForm,GameRevisionForm,UploadGameRevisionForm,GameRevisionWebPackage,WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
 class GameNotEnabled(Exception):
     pass
@@ -133,9 +134,22 @@ def upload_game_revision(request):
     c.update(csrf(request))
 
     if request.method == 'POST':
-        print request.POST
-        print request.FILES
-            
+        rp = request.POST
+        f = request.FILES
+        inst = None
+        if inst:
+            form = UploadGameRevisionForm(data=request.POST,files=request.FILES,instance=inst)
+        else:
+            form = UploadGameRevisionForm(data=request.POST,files=request.FILES)
+            if form.is_valid():
+                gr = GameRevision.objects.get(pk=rp['upload-gamerevref'])
+                path = GameRevisionWebPackage.static_dir(gr)
+                zf = zipfile.ZipFile(form.cleaned_data['upload_file'], 'r')
+                nl = zf.namelist()
+                print nl
+                zf.extractall(path)
+            else:
+                print form.errors
     return HttpResponseRedirect(request.POST['next']) # Redirect after POST
     
 @login_required

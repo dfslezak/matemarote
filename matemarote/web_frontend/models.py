@@ -29,6 +29,13 @@ class GameRevisionForm(ModelForm):
 class UploadGameRevisionForm(Form):
     upload_file = FileField(label=_('Select a zip file'))
 
+class GameRevisionWebPackage(models.Model):
+    class Meta:
+        abstract = True
+
+    def static_dir(game_revision):
+        return os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,game_revision.game.name,"v%s" % game_revision.version)
+
 
 class WebGameFlowNode(models.Model):
     game_flow_node = models.OneToOneField(GameFlowNode)
@@ -44,7 +51,7 @@ class WebGameFlowNode(models.Model):
         
     @property
     def static_dir(self):
-        return os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,self.game_flow_node.game_revision.game.name,"v%s" % self.game_flow_node.game_revision.version)
+        return GameRevisionWebPackage.static_dir(game_flow_node.game_revision)
     
     @property
     def resource_path(self):
