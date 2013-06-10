@@ -74,7 +74,11 @@ def edit_profile(request):
 @permission_required('games.administrator')
 def gamelist(request):
     c = RequestContext(request)
-   
+    c.update(csrf(request))
+
+    if request.method == 'POST':
+        print request.POST
+        
     games = Game.objects.all()
     c['games'] = games
     c['add_game_form'] = GameForm()
@@ -145,9 +149,12 @@ def upload_game_revision(request):
                 gr = GameRevision.objects.get(pk=rp['upload-gamerevref'])
                 path = GameRevisionWebPackage.static_dir(gr)
                 zf = zipfile.ZipFile(form.cleaned_data['upload_file'], 'r')
-                nl = zf.namelist()
-                print nl
-                zf.extractall(path)
+                if GameRevisionWebPackage.checkPackageNamelist(zf.namelist()):
+                    zf.extractall(path)
+                else:
+                    c['error_msg'] = 'Invalid Zip for game version package'
+                    print c['error_msg'] 
+                    HttpResponseRedirect(request.POST['next'],c)
             else:
                 print form.errors
     return HttpResponseRedirect(request.POST['next']) # Redirect after POST

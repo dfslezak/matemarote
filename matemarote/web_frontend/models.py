@@ -33,9 +33,14 @@ class GameRevisionWebPackage(models.Model):
     class Meta:
         abstract = True
 
+    @staticmethod
     def static_dir(game_revision):
         return os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,game_revision.game.name,"v%s" % game_revision.version)
 
+    @staticmethod
+    def checkPackageNamelist(namelist):
+        all_present = 'res/' in namelist and 'pages/' in namelist and 'gamefiles/' in namelist and 'screenshots' in namelist
+        return all_present
 
 class WebGameFlowNode(models.Model):
     game_flow_node = models.OneToOneField(GameFlowNode)
