@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 from django.template import RequestContext, Template
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse,HttpResponseRedirect
 
 from django.shortcuts import render_to_response,redirect
 from django.core.context_processors import csrf
@@ -10,10 +10,12 @@ from django.conf import settings
 
 import os
 import sys
+import datetime
+import zipfile
 
 from users.models import UserProfile,UserProfileForm
 from games.models import Game,GameRevision,GameFlowNode
-from web_frontend.models import WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
+from web_frontend.models import GameForm,GameRevisionForm,UploadGameRevisionForm,GameRevisionWebPackage,WEBGAMES_DIR,WEBGAMES_RES_DIR,WEBGAMES_GAMEFILES_DIR,WEBGAMES_SCREENSHOTS_DIR
 
 class GameNotEnabled(Exception):
     pass
@@ -69,6 +71,70 @@ def edit_profile(request):
 
     return render_to_response(template, c)
 
+@permission_required('games.administrator')
+def gamelist(request):
+    c = RequestContext(request)
+    c.update(csrf(request))
+
+    next_url = None
+    if request.method == 'POST':
+        next_url = request.POST.get('next', '/games/list/')
+        try:
+            action = request.POST['buttons']
+            if action == 'add-game':
+                form = GameForm(data=request.POST) 
+                if form.is_valid():
+                    n = form.cleaned_data['name']
+                    d = form.cleaned_data['description']
+                    g = Game(name=n,description=d)
+                    g.save()
+                else: 
+                    raise Exception('Invalid data in new game form.')
+            elif action == 'add-game-revision':
+                form = GameRevisionForm(data=request.POST) 
+                if form.is_valid():
+                    g = Game.objects.get(name=request.POST['gameref'])
+                    v = form.cleaned_data['version']
+                    cd = datetime.datetime.now()
+                    pv = form.cleaned_data['previous_version']
+                    gr = GameRevision(game=g,version=v,creation_date=cd,previous_version=pv)
+                    gr.save()
+                else: 
+                    raise Exception('Invalid data in new game revision form.')
+            elif action == 'upload':
+                f = request.FILES
+                inst = None
+                if inst:
+                    form = UploadGameRevisionForm(data=request.POST,files=request.FILES,instance=inst)
+                else:
+                    form = UploadGameRevisionForm(data=request.POST,files=request.FILES)
+                    if form.is_valid():
+                        gr = GameRevision.objects.get(pk=request.POST['upload-gamerevref'])
+                        path = GameRevisionWebPackage.static_dir(gr)
+                        zf = zipfile.ZipFile(form.cleaned_data['upload_file'], 'r')
+                        if GameRevisionWebPackage.checkPackageNamelist(zf.namelist()):
+                            zf.extractall(path)
+                        else:
+                            raise Exception('Invalid Zip for game version package.')
+                    else:
+                        raise Exception('Invalid data in upload form.')
+
+        except Exception as e:
+            next_url = None 
+            c['error_msg'] = str(e) 
+
+    if next_url == None:
+        games = Game.objects.all()
+        c['games'] = games
+        c['add_game_form'] = GameForm()
+        c['add_game_revision_form'] = GameRevisionForm()
+        c['upload_game_revision_form'] = UploadGameRevisionForm()
+        ret_val = render_to_response('games/gamelist.html',c)
+    else:
+        ret_val = HttpResponseRedirect(next_url)
+
+    return ret_val
+                
 @login_required
 def gameflow(request):
     c = RequestContext(request)

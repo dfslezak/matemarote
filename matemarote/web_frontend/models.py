@@ -1,5 +1,7 @@
+from django.utils.translation import ugettext as _
 from django.db import models
-from games.models import GameRevision,GameFlowNode
+from django.forms import Form,ModelForm, Textarea,FileField
+from games.models import Game, GameRevision,GameFlowNode
 from django.conf import settings
 import os
 
@@ -10,6 +12,35 @@ WEBGAMES_SCREENSHOTS_DIR = 'screenshots'
 
 TOOLTIP_TEMPLATE = "<h2>%s</h2><p class='text'>%s</p>"
 
+class GameForm(ModelForm):
+    class Meta:
+        model = Game
+        fields = ['name','description']
+        widgets = {'description': Textarea}
+
+class GameRevisionForm(ModelForm):
+    class Meta:
+        model = GameRevision
+        fields = ['version','previous_version']
+    #def __init__(self, *args, **kwargs):
+        #super(GameRevisionForm, self).__init__(*args, **kwargs)
+        #self.fields['previous_version'].queryset = GameRevision.objects.filter(game=self.instance.game)
+
+class UploadGameRevisionForm(Form):
+    upload_file = FileField(label=_('Select a zip file'))
+
+class GameRevisionWebPackage(models.Model):
+    class Meta:
+        abstract = True
+
+    @staticmethod
+    def static_dir(game_revision):
+        return os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,game_revision.game.name,"v%s" % game_revision.version)
+
+    @staticmethod
+    def checkPackageNamelist(namelist):
+        all_present = 'res/' in namelist and 'pages/' in namelist and 'gamefiles/' in namelist and 'screenshots' in namelist
+        return all_present
 
 class WebGameFlowNode(models.Model):
     game_flow_node = models.OneToOneField(GameFlowNode)
@@ -25,7 +56,7 @@ class WebGameFlowNode(models.Model):
         
     @property
     def static_dir(self):
-        return os.path.join(settings.MEDIA_ROOT,WEBGAMES_DIR,self.game_flow_node.game_revision.game.name,"v%s" % self.game_flow_node.game_revision.version)
+        return GameRevisionWebPackage.static_dir(game_flow_node.game_revision)
     
     @property
     def resource_path(self):
