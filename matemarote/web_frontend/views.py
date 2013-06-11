@@ -76,89 +76,65 @@ def gamelist(request):
     c = RequestContext(request)
     c.update(csrf(request))
 
+    next_url = None
     if request.method == 'POST':
-        print request.POST
-        
-    games = Game.objects.all()
-    c['games'] = games
-    c['add_game_form'] = GameForm()
-    c['add_game_revision_form'] = GameRevisionForm()
-    c['upload_game_revision_form'] = UploadGameRevisionForm()
-    
-    return render_to_response('games/gamelist.html',c)
-
-@permission_required('games.administrator')
-def add_game(request):
-    c = RequestContext(request)
-    c.update(csrf(request))
-
-    if request.method == 'POST':
-        print request.POST
-        form = GameForm(data=request.POST) 
-        print form
-        if form.is_valid():
-            n = form.cleaned_data['name']
-            d = form.cleaned_data['description']
-            g = Game(name=n,description=d)
-            g.save()
-        else: 
-            print 'invalid form'
-            
-    return HttpResponseRedirect('/games/list/') # Redirect after POST
-
-@permission_required('games.administrator')
-def add_game_revision(request):
-    c = RequestContext(request)
-    c.update(csrf(request))
-
-    if request.method == 'POST':
-        print request.POST
-        form = GameRevisionForm(data=request.POST) 
-        print form
-        if form.is_valid():
-            try:
-                g = Game.objects.get(name=request.POST['gameref'])
-                v = form.cleaned_data['version']
-                cd = datetime.datetime.now()
-                pv = form.cleaned_data['previous_version']
-                gr = GameRevision(game=g,version=v,creation_date=cd,previous_version=pv)
-                gr.save()
-            except Exception as e:
-                print e
-        else: 
-            print 'invalid form'
-            print form.errors
-            
-    return HttpResponseRedirect(request.POST['next']) # Redirect after POST
-
-
-@permission_required('games.administrator')
-def upload_game_revision(request):
-    c = RequestContext(request)
-    c.update(csrf(request))
-
-    if request.method == 'POST':
-        rp = request.POST
-        f = request.FILES
-        inst = None
-        if inst:
-            form = UploadGameRevisionForm(data=request.POST,files=request.FILES,instance=inst)
-        else:
-            form = UploadGameRevisionForm(data=request.POST,files=request.FILES)
-            if form.is_valid():
-                gr = GameRevision.objects.get(pk=rp['upload-gamerevref'])
-                path = GameRevisionWebPackage.static_dir(gr)
-                zf = zipfile.ZipFile(form.cleaned_data['upload_file'], 'r')
-                if GameRevisionWebPackage.checkPackageNamelist(zf.namelist()):
-                    zf.extractall(path)
+        next_url = request.POST.get('next', '/games/list/')
+        try:
+            action = request.POST['buttons']
+            if action == 'add-game':
+                form = GameForm(data=request.POST) 
+                if form.is_valid():
+                    n = form.cleaned_data['name']
+                    d = form.cleaned_data['description']
+                    g = Game(name=n,description=d)
+                    g.save()
+                else: 
+                    raise Exception('Invalid data in new game form.')
+            elif action == 'add-game-revision':
+                form = GameRevisionForm(data=request.POST) 
+                if form.is_valid():
+                    g = Game.objects.get(name=request.POST['gameref'])
+                    v = form.cleaned_data['version']
+                    cd = datetime.datetime.now()
+                    pv = form.cleaned_data['previous_version']
+                    gr = GameRevision(game=g,version=v,creation_date=cd,previous_version=pv)
+                    gr.save()
+                else: 
+                    raise Exception('Invalid data in new game revision form.')
+            elif action == 'upload':
+                f = request.FILES
+                inst = None
+                if inst:
+                    form = UploadGameRevisionForm(data=request.POST,files=request.FILES,instance=inst)
                 else:
-                    c['error_msg'] = 'Invalid Zip for game version package'
-                    print c['error_msg'] 
-                    HttpResponseRedirect(request.POST['next'],c)
-            else:
-                print form.errors
-    return HttpResponseRedirect(request.POST['next']) # Redirect after POST
-    
+                    form = UploadGameRevisionForm(data=request.POST,files=request.FILES)
+                    if form.is_valid():
+                        gr = GameRevision.objects.get(pk=request.POST['upload-gamerevref'])
+                        path = GameRevisionWebPackage.static_dir(gr)
+                        zf = zipfile.ZipFile(form.cleaned_data['upload_file'], 'r')
+                        if GameRevisionWebPackage.checkPackageNamelist(zf.namelist()):
+                            zf.extractall(path)
+                        else:
+                            raise Exception('Invalid Zip for game version package.')
+                    else:
+                        raise Exception('Invalid data in upload form.')
+
+        except Exception as e:
+            next_url = None 
+            c['error_msg'] = str(e) 
+
+    if next_url == None:
+        games = Game.objects.all()
+        c['games'] = games
+        c['add_game_form'] = GameForm()
+        c['add_game_revision_form'] = GameRevisionForm()
+        c['upload_game_revision_form'] = UploadGameRevisionForm()
+        ret_val = render_to_response('games/gamelist.html',c)
+    else:
+        ret_val = HttpResponseRedirect(next_url)
+
+    return ret_val
+                
 @login_required
 def gameflow(request):
     c = RequestContext(request)

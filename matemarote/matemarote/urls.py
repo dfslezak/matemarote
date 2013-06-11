@@ -30,10 +30,10 @@ urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += patterns('',
-    url(r'^games/list/$', 'web_frontend.views.gamelist'),
-    url(r'^games/add_game/$', 'web_frontend.views.add_game'),
-    url(r'^games/add_game_revision/$', 'web_frontend.views.add_game_revision'),
-    url(r'^games/upload/$', 'web_frontend.views.upload_game_revision')
+    url(r'^games/list/$', 'web_frontend.views.gamelist')
+    #url(r'^games/add_game/$', 'web_frontend.views.add_game'),
+    #url(r'^games/add_game_revision/$', 'web_frontend.views.add_game_revision'),
+    #url(r'^games/upload/$', 'web_frontend.views.upload_game_revision')
     )
 
 

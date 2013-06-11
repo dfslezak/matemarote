@@ -38,7 +38,7 @@
     {% endfor %}      
 </div>
 <div id="game-add-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameAddLabel" aria-hidden="true">
-    <form id="game-add-form" method="post" action="/games/add_game/">{% csrf_token %}
+    <form id="game-add-form" method="post" action="/games/list/">{% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">{% trans 'Add game...' %}</h3>
@@ -48,13 +48,13 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <input class="btn btn-primary" type="submit" value="{% trans 'Add Game' %}" id="submit-addgame"/>
+        <button class="btn btn-primary" type="submit" name="buttons" value="add-game">{% trans 'Add Game' %}</button>
     </div>
     </form>
 </div>
 
 <div id="game-rev-add-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameRevAddLabel" aria-hidden="true">
-    <form id="game-rev-add-form" method="post" action="/games/add_game_revision/">{% csrf_token %}
+    <form id="game-rev-add-form" method="post" action="/games/list/">{% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">{% trans 'Add game revision...' %}</h3>
@@ -66,7 +66,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <input class="btn btn-primary" type="submit" value="{% trans 'Add Game Revision' %}" />
+        <button class="btn btn-primary" type="submit" name="buttons" value="add-game-revision">{% trans 'Add Game Revision' %}</button>
     </div>
     </form>
 </div>
@@ -85,7 +85,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary" type="submit" value="upload">{% trans 'Upload Game Package' %}</button>
+        <button class="btn btn-primary" type="submit" name="buttons" value="upload">{% trans 'Upload Game Package' %}</button>
     </div>
     </form>
 </div>
