@@ -56,7 +56,7 @@ class WebGameFlowNode(models.Model):
         
     @property
     def static_dir(self):
-        return GameRevisionWebPackage.static_dir(game_flow_node.game_revision)
+        return GameRevisionWebPackage.static_dir(self.game_flow_node.game_revision)
     
     @property
     def resource_path(self):

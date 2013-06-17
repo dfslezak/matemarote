@@ -29,6 +29,20 @@
   <form enctype="multipart/form-data" method="post" action="" class="wide">
         {% csrf_token %}
     <p>
+    <label for="id_first_name">{% trans 'First name' %}:</label>
+    {% if form.birthdate.errors %}
+        <p class="text-error">{{ form.first_name.errors.as_text }}</p>
+    {% endif %}
+        {{ form.first_name }}
+    </p>
+    <p>
+    <label for="id_last_name">{% trans 'Last name' %}:</label>
+    {% if form.birthdate.errors %}
+        <p class="text-error">{{ form.last_name.errors.as_text }}</p>
+    {% endif %}
+    {{ form.last_name }}
+    </p>
+    <p>
       <label for="id_birthdate">{% trans 'Birthdate' %}:</label>
       {% if form.birthdate.errors %}
         <p class="text-error">{{ form.birthdate.errors.as_text }}</p>
