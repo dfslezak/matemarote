@@ -20,56 +20,85 @@
 
 {{form.media}}
 <div class="container">
-    <h1>{% trans 'Editing user profile' %}</h1>
 
-  {% if form.errors %}
-  <p class="text-error">Please correct the errors below: {{ form.non_field_errors }}</p>
-  {% endif %}
+    {% if form.errors %}
+        <p class="text-error">Please correct the errors below: {{ form.non_field_errors }}</p>
+    {% endif %}
   
-  <form enctype="multipart/form-data" method="post" action="" class="wide">
-        {% csrf_token %}
-    <p>
-      <label for="id_birthdate">{% trans 'Birthdate' %}:</label>
-      {% if form.birthdate.errors %}
-        <p class="text-error">{{ form.birthdate.errors.as_text }}</p>
-      {% endif %}
-      <input type="text" id="id_birthdate" name="birthdate" value="{{ form.birthdate.value|default_if_none:""|date:"SHORT_DATE_FORMAT" }}"/>
-    </p>
-    <p>
-      <label for="id_gender">Gender:</label>
-      {% if form.gender.errors %}
-        <p class="text-error">{{ form.gender.errors.as_text }}</p>
-      {% endif %}
-      {{ form.gender }}
-    </p>
-    <p>
-      <label for="id_handedness">Handedness:</label>
-      {% if form.handedness.errors %}
-        <p class="text-error">{{ form.handedness.errors.as_text }}</p>
-      {% endif %}
-      {{ form.handedness }}
-    </p>
-    <p>
-      <label for="id_siblingnumber">Sibling Number:</label>
-      {% if form.siblingnumber.errors %}
-        <p class="text-error">{{ form.siblingnumber.errors.as_text }}</p>
-      {% endif %}
-      {{ form.siblingnumber }}
-    </p>
-    <p>
-      <label for="id_siblingorder">Sibling Order (1 being the oldest):</label>
-      {% if form.siblingorder.errors %}
-        <p class="text-error">{{ form.siblingorder.errors.as_text }}</p>
-      {% endif %}
-      {{ form.siblingorder }}
-    <p>
-    </p>
-      <label for="id_avatar">Avatar:</label>
-      {% if form.avatar.errors %}
-        <p class="text-error">{{ form.avatar.errors.as_text }}</p>
-      {% endif %}
-      {{ form.avatar }}
-    </p>
+    <form class="form-horizontal" enctype="multipart/form-data" method="post" action="" class="wide">{% csrf_token %}
+    <legend>{% trans 'Editing user profile' %}</legend>
+         <div class="control-group">
+            <label class="control-label" for="id_first_name">{% trans 'First name' %}</label>
+            <div class="controls">
+                {% if form.birthdate.errors %}
+                    <p class="text-error">{{ form.first_name.errors.as_text }}</p>
+                {% endif %}
+                {{ form.first_name }}
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_last_name">{% trans 'Last name' %}</label>
+            <div class="controls">
+                {% if form.birthdate.errors %}
+                    <p class="text-error">{{ form.last_name.errors.as_text }}</p>
+                {% endif %}
+                {{ form.last_name }}
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_birthdate">{% trans 'Birthdate' %}</label>
+            <div class="controls">
+                {% if form.birthdate.errors %}
+                    <p class="text-error">{{ form.birthdate.errors.as_text }}</p>
+                {% endif %}
+                <input type="text" id="id_birthdate" name="birthdate" value="{{ form.birthdate.value|default_if_none:""|date:"SHORT_DATE_FORMAT" }}"/>
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_gender">Gender</label>
+            <div class="controls">
+                {% if form.gender.errors %}
+                    <p class="text-error">{{ form.gender.errors.as_text }}</p>
+                {% endif %}
+                {{ form.gender }}
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_handedness">Handedness</label>
+            <div class="controls">
+                {% if form.handedness.errors %}
+                    <p class="text-error">{{ form.handedness.errors.as_text }}</p>
+                {% endif %}
+                {{ form.handedness }}
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_siblingnumber">Sibling Number</label>
+            <div class="controls">
+                {% if form.siblingnumber.errors %}
+                    <p class="text-error">{{ form.siblingnumber.errors.as_text }}</p>
+                {% endif %}
+                {{ form.siblingnumber }}
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_siblingorder">Sibling Order (1 being the oldest)</label>
+            <div class="controls">
+                {% if form.siblingorder.errors %}
+                    <p class="text-error">{{ form.siblingorder.errors.as_text }}</p>
+                {% endif %}
+                {{ form.siblingorder }}
+            </div>
+         </div>
+         <div class="control-group">
+            <label class="control-label" for="id_avatar">Avatar</label>
+            <div class="controls">
+                {% if form.avatar.errors %}
+                    <p class="text-error">{{ form.avatar.errors.as_text }}</p>
+                {% endif %}
+                {{ form.avatar }}
+            </div>
+         </div>
         <input class="btn btn-primary" type="submit" value="Submit" />
     </form>
 </div>

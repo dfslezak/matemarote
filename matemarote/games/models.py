@@ -12,6 +12,10 @@ class Game(models.Model):
     #        return GameRevision.objects.filter(game = self)
     
     #game_revisions = property(getGameRevisions)
+    class Meta:
+        permissions = (
+            ('game_admin', 'Game administrator permission'),
+        )
 
     
 class GameRevision(models.Model):

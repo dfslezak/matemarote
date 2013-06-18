@@ -36,11 +36,25 @@
  
       {% if user.is_authenticated %}
         <ul class="nav pull-right">
-            <li>
-                <p class="navbar-text">{% trans "Logged in as" %} <a href="/accounts/profile/">{{ user.username }}</a> </p>
-                </li>
-                <a class="btn btn-small btn-primary" href="/accounts/logout/">{% trans "Logout" %}</a>
-        </ul>
+            <li class="dropdown">
+                {% if user.get_profile.first_name or user.get_profile.last_name %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_profile.first_name }} {{ user.get_profile.last_name }}<b class="caret"></b></a>
+                {% else %}
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Logged in as' %} {{ user.username }}<b class="caret"></b></a>
+                {% endif %}
+                <ul class="dropdown-menu">
+                    <li><a href="/accounts/profile/">{% trans "View Profile" %}</a></li>
+                    <li><a href="/accounts/password/change/">{% trans "Change password" %}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/accounts/logout/">{% trans "Logout" %}</a></li>
+                    {% if perms.games.game_admin %}
+                        <li class="divider"></li>
+                        <li><a href="/games/admin/">{% trans "Game admin" %}</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+        </ul>        
+        
       {% else %}
         <ul class="nav pull-right">
             <li><p class="navbar-text"><a href="/accounts/password/reset">{% trans "forgot password?" %}</a></p></li>
