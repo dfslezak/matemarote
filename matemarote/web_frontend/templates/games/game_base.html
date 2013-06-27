@@ -24,6 +24,12 @@
                     now_date = new Date()
                     this.start_time = now_date.getTime();
                     this.playtime_timer = $.timer(this.save_seconds_played,update_interval,true);
+                    $.post('/gamelogger/new_play_session/{{ game_flow_node }}/',function(json){
+                        if (json.not_authenticated) {
+                            alert('Not authorized.');  // Or something in a message DIV
+                            return;
+                        }
+                        });
                     return;
                     },
                 //'is_authenticated': {% if user.is_authenticated %}true{% else %}false{% endif %},

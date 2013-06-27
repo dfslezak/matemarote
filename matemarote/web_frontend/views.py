@@ -77,7 +77,7 @@ def gamelist(request):
 
     next_url = None
     if request.method == 'POST':
-        next_url = request.POST.get('next', '/games/list/')
+        next_url = request.POST.get('next', '/games/admin/')
         try:
             action = request.POST['buttons']
             if action == 'add-game':
@@ -88,6 +88,7 @@ def gamelist(request):
                     g = Game(name=n,description=d)
                     g.save()
                 else: 
+                    print form
                     raise Exception('Invalid data in new game form.')
             elif action == 'add-game-revision':
                 form = GameRevisionForm(data=request.POST) 
@@ -99,6 +100,7 @@ def gamelist(request):
                     gr = GameRevision(game=g,version=v,creation_date=cd,previous_version=pv)
                     gr.save()
                 else: 
+                    print form
                     raise Exception('Invalid data in new game revision form.')
             elif action == 'upload':
                 f = request.FILES
@@ -116,6 +118,7 @@ def gamelist(request):
                         else:
                             raise Exception('Invalid Zip for game version package.')
                     else:
+                        print form
                         raise Exception('Invalid data in upload form.')
 
         except Exception as e:
@@ -186,6 +189,7 @@ def serve_game(request, game_flow_node):
         
         
         c['seconds_played'] = 0
+        c['game_flow_node'] = game_flow_node
         
         t = Template(open(template,'r').read())
         tr = t.render(c)
