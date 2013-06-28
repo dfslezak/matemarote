@@ -32,7 +32,8 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += patterns('',
     url(r'^games/admin/$', 'web_frontend.views.gamelist'),
-    url(r'^gamelogger/new_play_session/(?P<game_flow_node>.*)/$', 'gamelogger.views.new_play_session'),
+    url(r'^gamelogger/new_play_session/$', 'gamelogger.views.new_play_session'),
+    url(r'^gamelogger/log_entry/$', 'gamelogger.views.log_action'),
     #url(r'^games/add_game/$', 'web_frontend.views.add_game'),
     #url(r'^games/add_game_revision/$', 'web_frontend.views.add_game_revision'),
     #url(r'^games/upload/$', 'web_frontend.views.upload_game_revision')

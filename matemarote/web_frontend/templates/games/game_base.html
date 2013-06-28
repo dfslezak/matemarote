@@ -7,7 +7,8 @@
 {% block title %}{% trans 'Mate Marote' %}{% endblock %}
 {% block head %}
 
-<link href="{% static "games.css" %}" rel="stylesheet" media="screen">
+<link href="{% static 'games.css' %}" rel="stylesheet" media="screen">
+<script src="{% static 'logger/logger.js' %}"></script>
 
 <script type="text/javascript">
 
@@ -17,21 +18,31 @@
         jQuery('#container').show("slow");
         });
         
+        
         $.games = {
+                'logger': null,
                 'playtime_timer': null, 
                 'game_start': function(update_interval){
                     update_interval = typeof update_interval !== 'undefined' ? update_interval : 1000;
                     now_date = new Date()
                     this.start_time = now_date.getTime();
                     this.playtime_timer = $.timer(this.save_seconds_played,update_interval,true);
-                    $.post('/gamelogger/new_play_session/{{ game_flow_node }}/',function(json){
-                        if (json.not_authenticated) {
-                            alert('Not authorized.');  // Or something in a message DIV
-                            return;
-                        }
-                        });
+                    $.ajax({
+                          type: "POST",
+                          url: '/gamelogger/new_play_session/',
+                          data: {'game_flow_node': {{ game_flow_node }} },
+                          headers: {'X-CSRFToken':$.cookie('csrftoken'),
+                                    'sessionid':$.cookie('sessionid') },
+                          success: function(json){
+                            if (json.not_authenticated) {
+                                alert('Not authorized.');  // Or something in a message DIV
+                                return;
+                            }
+                          }
+                    });
+                    this.logger = new Logger('/gamelogger/log_entry/');
                     return;
-                    },
+                },
                 //'is_authenticated': {% if user.is_authenticated %}true{% else %}false{% endif %},
                 'start_time': -1,
                 'seconds_played': {{ seconds_played }},
