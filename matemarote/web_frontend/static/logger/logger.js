@@ -1,7 +1,7 @@
 /* Remote game log saver
- * requires JSON.js and jQuery
+ * requires jQuery and jQuery cookie plugin
  * Usage:
- * var logger = new Logger('/saving_url/', game_id)
+ * var logger = new Logger('/saving_url/')
  * logger.log('some_event_name', {'some_arg':'arg_value', 'some_list':[1,2,3,4]})
  * logger.finalize(function(){ alert('game saved'); }, function(){ alert("couldn't save game"); })
  * */
