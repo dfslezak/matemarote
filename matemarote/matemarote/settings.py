@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'users',
     'games',
     'web_frontend',
+    'gamelogger',
 )
 
 # A sample logging configuration. The only tangible logging

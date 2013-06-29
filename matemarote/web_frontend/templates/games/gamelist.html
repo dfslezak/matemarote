@@ -9,7 +9,7 @@
 {% block content %}
 
 <div class="container">
-
+    
     <div style="max-width: 400px; margin: 0 auto 10px;">
         <p><a href="#game-add-modal" class="btn btn-large btn-block btn-primary" role="button" data-toggle="modal">{% trans 'Create new game' %}</a></p>
     </div>
@@ -38,7 +38,7 @@
     {% endfor %}      
 </div>
 <div id="game-add-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameAddLabel" aria-hidden="true">
-    <form id="game-add-form" method="post" action="/games/list/">{% csrf_token %}
+    <form id="game-add-form" method="post" action="/games/admin/">{% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">{% trans 'Add game...' %}</h3>
@@ -54,13 +54,13 @@
 </div>
 
 <div id="game-rev-add-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameRevAddLabel" aria-hidden="true">
-    <form id="game-rev-add-form" method="post" action="/games/list/">{% csrf_token %}
+    <form id="game-rev-add-form" method="post" action="/games/admin/">{% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">{% trans 'Add game revision...' %}</h3>
     </div>
     <div class="modal-body">
-            <input type="hidden" value="/games/list/" name="next" id="id_next"/>
+            <input type="hidden" value="/games/admin/" name="next" id="id_next"/>
             <input type="hidden" value="" name="gameref" id="id_gameref"/>
             {{ add_game_revision_form.as_p }}
     </div>
@@ -72,13 +72,13 @@
 </div>
 
 <div id="upload-files-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="gameRevAddLabel" aria-hidden="true">
-    <form id="upload-files-form" method="post" action="/games/list/" enctype="multipart/form-data">{% csrf_token %}
+    <form id="upload-files-form" method="post" action="/games/admin/" enctype="multipart/form-data">{% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">{% trans 'Upload game version package' %}</h3>
     </div>
     <div class="modal-body">
-            <input type="hidden" value="/games/list/" name="next" id="id_next"/>
+            <input type="hidden" value="/games/admin/" name="next" id="id_next"/>
             <input type="hidden" value="" name="upload-gameref"/>
             <input type="hidden" value="" name="upload-gamerevref"/>
             {{ upload_game_revision_form.as_p }}
