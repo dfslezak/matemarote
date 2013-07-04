@@ -1,0 +1,57 @@
+[
+  {
+    "model": "users.Program",
+    "pk": 1,
+    "fields": {
+      "name": "Programa Default",
+      "language": "ES",
+      "parent": null,
+      "entry_url": "",
+      "game_flow": null
+    }
+  },
+  {
+    "model": "users.Program",
+    "pk": 2,
+    "fields": {
+      "name": "La Rioja",
+      "language": "ES",
+      "parent": null,
+      "entry_url": "",
+      "game_flow": null
+    }
+  },
+  {
+    "model": "users.Program",
+    "pk": 3,
+    "fields": {
+      "name": "Chilecito",
+      "language": "ES",
+      "parent": 2,
+      "entry_url": "",
+      "game_flow": 2
+    }
+  },
+  {
+    "model": "users.Program",
+    "pk": 4,
+    "fields": {
+      "name": "Ceibal",
+      "language": "ES",
+      "parent": null,
+      "entry_url": "",
+      "game_flow": 3
+    }
+  },
+  {
+    "model": "users.Program",
+    "pk": 5,
+    "fields": {
+      "name": "Capital",
+      "language": "ES",
+      "parent": 2,
+      "entry_url": "",
+      "game_flow": 1
+    }
+  },  
+]
