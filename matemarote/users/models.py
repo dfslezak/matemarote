@@ -24,7 +24,7 @@ class UserProfile(models.Model):
     game_flow_status = models.ForeignKey(GameFlowStatus,null=True)
     
     def get_gameflow(self):
-        return self.program.game_flow
+        return self.program.gameflow
 
 class Program(models.Model):
     name = models.CharField(max_length=150)
