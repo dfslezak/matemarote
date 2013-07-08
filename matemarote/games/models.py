@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from model_utils.managers import InheritanceManager
 from django.forms import ModelForm, Textarea
+from django.core.exceptions import ObjectDoesNotExist
 
 class Game(models.Model):
     name = models.SlugField(unique=True,null=False,blank=False)
@@ -70,8 +71,12 @@ class GameFlowRule_GamePartialCompletionDep(GameFlowRule):
         #print "\n -------------------- ", status_nodes
         lock = False
         for n in self.previous_nodes.all():
-            st_node = status_nodes.get(node=n)
-            lock = lock or not (st_node.completion > self.completion_threshold)
+            try:
+                st_node = status_nodes.get(node=n)
+                lock = lock or not (st_node.completion > self.completion_threshold)
+            except ObjectDoesNotExist:
+                lock = True
+    
             #print "\n -------------------- ", st_node.completion, " > ", self.completion_threshold
         return lock
 
