@@ -23,7 +23,7 @@
         "last_play_totaltime": 30.0,
         "total_sessions": 1
     }
-  }
+  },
   {
     "model": "games.GameFlowStatus",
     "pk": 3,
@@ -48,7 +48,7 @@
         "last_play_totaltime": 30.0,
         "total_sessions": 1
     }
-  }
+  },
   {
     "model": "games.GameFlowNodeStatus",
     "pk": 3,
@@ -63,6 +63,5 @@
         "total_sessions": 1
     }
   }
-  
-  
+   
 ]

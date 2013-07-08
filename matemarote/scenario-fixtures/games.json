@@ -1,0 +1,66 @@
+[
+  {
+    "model": "games.Game",
+    "pk": 1,
+    "fields": {
+        "name": "avioncito", 
+        "description": "test_game1_description"}
+  },
+  {
+    "model": "games.Game",
+    "pk": 2,
+    "fields": {
+        "name": "test_game2", 
+        "description": "test_game2_description"}
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 1,
+    "fields": {
+      "game": 1,
+      "version": "1.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 2,
+    "fields": {
+      "game": 2,
+      "version": "1.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 3,
+    "fields": {
+      "game": 1,
+      "version": "1.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 4,
+    "fields": {
+      "game": 2,
+      "version": "1.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 5,
+    "fields": {
+      "game": 2,
+      "version": "2.0.0.0",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": 2
+    }
+  }
+]

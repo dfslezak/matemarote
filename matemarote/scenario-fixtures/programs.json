@@ -7,7 +7,7 @@
       "language": "ES",
       "parent": null,
       "entry_url": "",
-      "game_flow": null
+      "gameflow": null
     }
   },
   {
@@ -18,7 +18,7 @@
       "language": "ES",
       "parent": null,
       "entry_url": "",
-      "game_flow": null
+      "gameflow": null
     }
   },
   {
@@ -29,7 +29,7 @@
       "language": "ES",
       "parent": 2,
       "entry_url": "",
-      "game_flow": 2
+      "gameflow": 2
     }
   },
   {
@@ -40,7 +40,7 @@
       "language": "ES",
       "parent": null,
       "entry_url": "",
-      "game_flow": 3
+      "gameflow": 3
     }
   },
   {
@@ -51,7 +51,7 @@
       "language": "ES",
       "parent": 2,
       "entry_url": "",
-      "game_flow": 1
+      "gameflow": 1
     }
-  },  
+  }
 ]

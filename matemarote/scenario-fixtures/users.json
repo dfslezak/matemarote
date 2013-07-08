@@ -59,7 +59,7 @@
       "siblingorder": 0,
       "avatar": null, 
       "program": 5,
-      "game_flow_status": 2,
+      "game_flow_status": 2
     }
   },
 
@@ -92,7 +92,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 5,
-      "game_flow_status": 3,
+      "game_flow_status": 3
     }
   },
   {
@@ -318,5 +318,5 @@
       "program": 4,
       "game_flow_status": 10
     }
-  },  
+  }
 ]
