@@ -59,7 +59,7 @@
       "siblingorder": 0,
       "avatar": null, 
       "program": 5,
-      "game_flow_status": 2
+      "gameflow_status": 2
     }
   },
 
@@ -92,7 +92,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 5,
-      "game_flow_status": 3
+      "gameflow_status": 3
     }
   },
   {
@@ -124,7 +124,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 5,
-      "game_flow_status": 4
+      "gameflow_status": 4
     }
   },
   {
@@ -156,7 +156,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 5,
-      "game_flow_status": 5
+      "gameflow_status": 5
     }
   },
   {
@@ -188,7 +188,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 3,
-      "game_flow_status": 6
+      "gameflow_status": 6
     }
   },
   {
@@ -220,7 +220,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 3,
-      "game_flow_status": 7
+      "gameflow_status": 7
     }
   },
     {
@@ -252,7 +252,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 4,
-      "game_flow_status": 8
+      "gameflow_status": 8
     }
   },
   {
@@ -284,7 +284,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 4,
-      "game_flow_status": 9
+      "gameflow_status": 9
     }
   },
   {
@@ -316,7 +316,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 4,
-      "game_flow_status": 10
+      "gameflow_status": 10
     }
   }
 ]

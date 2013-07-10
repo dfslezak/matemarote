@@ -23,7 +23,7 @@
     "model": "games.GameFlowNode",
     "pk": 1,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 1, 
         "skill_level": 1}
   },
@@ -31,7 +31,7 @@
     "model": "games.GameFlowNode",
     "pk": 2,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 2, 
         "skill_level": 1}
   },
@@ -39,7 +39,7 @@
     "model": "games.GameFlowNode",
     "pk": 3,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 3, 
         "skill_level": 2}
   },
@@ -47,7 +47,7 @@
     "model": "games.GameFlowNode",
     "pk": 4,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 4, 
         "skill_level": 3}
   },
@@ -55,16 +55,16 @@
     "model": "games.GameFlowNode",
     "pk": 5,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 5, 
         "skill_level": 4}
   },
   
-  {"pk": 1, "model": "games.gameflowrule", "fields": {"game_flow_node": 2}}, 
-  {"pk": 2, "model": "games.gameflowrule", "fields": {"game_flow_node": 3}}, 
-  {"pk": 3, "model": "games.gameflowrule", "fields": {"game_flow_node": 3}}, 
-  {"pk": 4, "model": "games.gameflowrule", "fields": {"game_flow_node": 4}}, 
-  {"pk": 5, "model": "games.gameflowrule", "fields": {"game_flow_node": 5}}, 
+  {"pk": 1, "model": "games.gameflowrule", "fields": {"gameflow_node": 2}}, 
+  {"pk": 2, "model": "games.gameflowrule", "fields": {"gameflow_node": 3}}, 
+  {"pk": 3, "model": "games.gameflowrule", "fields": {"gameflow_node": 3}}, 
+  {"pk": 4, "model": "games.gameflowrule", "fields": {"gameflow_node": 4}}, 
+  {"pk": 5, "model": "games.gameflowrule", "fields": {"gameflow_node": 5}}, 
 
   {
     "model": "games.GameFlowRule_GamePartialCompletionDep",

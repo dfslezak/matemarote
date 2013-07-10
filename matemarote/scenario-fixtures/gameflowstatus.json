@@ -14,7 +14,7 @@
     "model": "games.GameFlowNodeStatus",
     "pk": 1,
     "fields": {
-        "game_flow_status": 2,
+        "gameflow_status": 2,
         "node": 1,
         "game_finished": "False",
         "completion": 100,
@@ -39,7 +39,7 @@
     "model": "games.GameFlowNodeStatus",
     "pk": 2,
     "fields": {
-        "game_flow_status": 3,
+        "gameflow_status": 3,
         "node": 1,
         "game_finished": "False",
         "completion": 90,
@@ -53,7 +53,7 @@
     "model": "games.GameFlowNodeStatus",
     "pk": 3,
     "fields": {
-        "game_flow_status": 3,
+        "gameflow_status": 3,
         "node": 2,
         "game_finished": "False",
         "completion": 100,
