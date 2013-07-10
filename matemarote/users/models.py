@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(_("Avatar"),upload_to='avatares',null=True,blank=True);
 
     program = models.ForeignKey('Program',default=1)
-    game_flow_status = models.ForeignKey(GameFlowStatus,null=True)
+    gameflow_status = models.ForeignKey(GameFlowStatus,null=True)
     
     def get_gameflow(self):
         return self.program.gameflow
