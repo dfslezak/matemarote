@@ -12,9 +12,9 @@ import StringIO
 def new_play_session(request):    
     if request.method == 'POST':
         try:            
-            gfn = json.loads(request.POST['game_flow_node'])
-            print 'game_flow_node:', gfn
-            session = PlaySession.objects.create(user = request.user, game_flow_node = GameFlowNode.objects.get(pk=gfn), 
+            gfn = json.loads(request.POST['gameflow_node'])
+            print 'gameflow_node:', gfn
+            session = PlaySession.objects.create(user = request.user, gameflow_node = GameFlowNode.objects.get(pk=gfn), 
                                         ip = request.META['REMOTE_ADDR'])
             request.session['current_play_session'] = session.id
         
