@@ -30,7 +30,7 @@
                     $.ajax({
                           type: "POST",
                           url: '/gamelogger/new_play_session/',
-                          data: {'game_flow_node': {{ game_flow_node }} },
+                          data: {'gameflow_node': {{ gameflow_node }} },
                           headers: {'X-CSRFToken':$.cookie('csrftoken'),
                                     'sessionid':$.cookie('sessionid') },
                           success: function(json){

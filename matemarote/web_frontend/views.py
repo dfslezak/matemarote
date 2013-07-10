@@ -144,7 +144,7 @@ def gameflow(request):
     user = request.user.get_profile()
     gf = user.get_gameflow()
     
-    skills = gf.list_games_per_skill(user.game_flow_status)
+    skills = gf.list_games_per_skill(user.gameflow_status)
     skills_list = []
     
     for skill in sorted(skills.keys()):
@@ -163,7 +163,7 @@ def gameflow(request):
     return render_to_response('games/gameflow.html', c)
     
 @login_required
-def serve_game(request, game_flow_node):
+def serve_game(request, gameflow_node):
     c = RequestContext(request)
     c.update(csrf(request))
     
@@ -174,11 +174,11 @@ def serve_game(request, game_flow_node):
         user = request.user.get_profile()
         gf = user.get_gameflow()
         
-        gfn = GameFlowNode.objects.get(pk=game_flow_node)
-        if not gfn.game_flow == gf:
+        gfn = GameFlowNode.objects.get(pk=gameflow_node)
+        if not gfn.gameflow == gf:
             raise ObjectDoesNotExist()
         
-        if not gfn.is_enabled(user.game_flow_status):
+        if not gfn.is_enabled(user.gameflow_status):
             raise GameNotEnabled()
         #selected_game = Game.objects.get(name=game_name)
         selected_game_revision = gfn.game_revision
@@ -189,7 +189,7 @@ def serve_game(request, game_flow_node):
         
         
         c['seconds_played'] = 0
-        c['game_flow_node'] = game_flow_node
+        c['gameflow_node'] = gameflow_node
         
         t = Template(open(template,'r').read())
         tr = t.render(c)
@@ -218,10 +218,10 @@ def _serve_game_path(request, directory, filename):
         raise Http404("File Not Found: %s" % (full_path))
     return serve(request, filename, document_root=full_dir)
 
-def serve_game_resource(request, game_flow_node, resource_path):
-    gfn = GameFlowNode.objects.get(pk=game_flow_node)
+def serve_game_resource(request, gameflow_node, resource_path):
+    gfn = GameFlowNode.objects.get(pk=gameflow_node)
     return _serve_game_path(request, gfn.webgameflownode.resource_path, resource_path)
 
-def serve_game_file(request, game_flow_node, game_file_path):
-    gfn = GameFlowNode.objects.get(pk=game_flow_node)
+def serve_game_file(request, gameflow_node, game_file_path):
+    gfn = GameFlowNode.objects.get(pk=gameflow_node)
     return _serve_game_path(request, gfn.webgameflownode.game_file_path, game_file_path)
