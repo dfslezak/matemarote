@@ -3,7 +3,7 @@
     "model": "games.GameFlowNode",
     "pk": 1,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 1, 
         "skill_level": 1}
   },
@@ -11,7 +11,7 @@
     "model": "games.GameFlowNode",
     "pk": 2,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 2, 
         "skill_level": 2}
   },
@@ -19,13 +19,13 @@
     "model": "games.GameFlowNode",
     "pk": 3,
     "fields": {
-        "game_flow": 1, 
+        "gameflow": 1, 
         "game_revision": 3, 
         "skill_level": 2}
   },
   
-  {"pk": 1, "model": "games.gameflowrule", "fields": {"game_flow_node": 2}}, 
-  {"pk": 2, "model": "games.gameflowrule", "fields": {"game_flow_node": 3}}, 
+  {"pk": 1, "model": "games.gameflowrule", "fields": {"gameflow_node": 2}}, 
+  {"pk": 2, "model": "games.gameflowrule", "fields": {"gameflow_node": 3}}, 
 
   {
     "model": "games.GameFlowRule_GameFullDep",
@@ -64,7 +64,7 @@
     "model": "games.GameFlowNodeStatus",
     "pk": 1,
     "fields": {
-        "game_flow_status": 1,
+        "gameflow_status": 1,
         "node": 1,
         "game_finished": "False",
         "completion": 60,

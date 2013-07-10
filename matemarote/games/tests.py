@@ -48,11 +48,11 @@ class GameFlowRulesTest(TestCase):
     def test_partial_completion(self):
         gf = GameFlow.objects.all()[0]
         gfn = GameFlowNode.objects.all()[2]
-        gfr = GameFlowRule.objects.filter(game_flow_node=gfn).select_subclasses()
+        gfr = GameFlowRule.objects.filter(gameflow_node=gfn).select_subclasses()
         self.assertEqual(str(gfr),'[<GameFlowRule_GamePartialCompletionDep: GameFlowRule_GamePartialCompletionDep object>]')
 
         gfn0 = GameFlowNode.objects.all()[0]
-        gfs = GameFlowNodeStatus.objects.get(node=gfn0).game_flow_status
+        gfs = GameFlowNodeStatus.objects.get(node=gfn0).gameflow_status
         self.assertEqual(gfr[0].lock_game(gfs),False)
 
 class GameFlowTest(TestCase):
@@ -71,7 +71,7 @@ class GameFlowTest(TestCase):
     
         self.assertEqual(1 + 1, 2)
 
-    def test_game_flow_node(self):
+    def test_gameflow_node(self):
         g1 = Game(name='game1')
         g2 = Game(name='game2')
         g1.save()
@@ -85,12 +85,12 @@ class GameFlowTest(TestCase):
         gf = GameFlow()
         gf.save()
         
-        gfn1 = GameFlowNode(game_revision=gr1,skill_level=1,game_flow=gf)
-        gfn2 = GameFlowNode(game_revision=gr2,skill_level=2,game_flow=gf)
+        gfn1 = GameFlowNode(game_revision=gr1,skill_level=1,gameflow=gf)
+        gfn2 = GameFlowNode(game_revision=gr2,skill_level=2,gameflow=gf)
         gfn1.save()
         gfn2.save()
 
-        gfr1 = GameFlowRule_GameFullDep(game_flow_node=gfn2)#,rule_type=GameFlowRule.DEPENDENCY)        
+        gfr1 = GameFlowRule_GameFullDep(gameflow_node=gfn2)#,rule_type=GameFlowRule.DEPENDENCY)        
         gfr1.save()
         gfr1.previous_nodes.add(gfn1)
         gfr1.save()
