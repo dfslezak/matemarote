@@ -1,3 +1,5 @@
+# Debe existir matemarote/matemarote/scenario-fixtures/../media/games/avioncito/v1.0.5.1 con un juego andando
+
 real_game = {"game": 1, "version": "1.0.5.1",}
 dirs = [#{"game": 1, "version": "1.0.5.1",},
 {"game": 2, "version": "1.0.5.1",},
