@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from model_utils.managers import InheritanceManager
 from django.forms import ModelForm, Textarea
+from django.core.exceptions import ObjectDoesNotExist
 
 class Game(models.Model):
     name = models.SlugField(unique=True,null=False,blank=False)
@@ -29,21 +30,21 @@ class GameRevision(models.Model):
 class GameFlowRule(models.Model):
     objects = InheritanceManager()
     
-    game_flow_node = models.ForeignKey('GameFlowNode')
+    gameflow_node = models.ForeignKey('GameFlowNode')
     
     def lock_game(self,gf_status):
         return False
 
 class GameFlowNode(models.Model):        
-    game_flow = models.ForeignKey('GameFlow')
+    gameflow = models.ForeignKey('GameFlow')
     game_revision = models.ForeignKey(GameRevision)
     skill_level = models.IntegerField()
     
-    def is_enabled(self,game_flow_status):
+    def is_enabled(self,gameflow_status):
         enabled = True
-        rules = GameFlowRule.objects.filter(game_flow_node=self).select_subclasses()
+        rules = GameFlowRule.objects.filter(gameflow_node=self).select_subclasses()
         for r in rules:
-            enabled = enabled and not r.lock_game(game_flow_status)
+            enabled = enabled and not r.lock_game(gameflow_status)
             
         return enabled
 
@@ -54,7 +55,7 @@ class GameFlowRule_GameFullDep(GameFlowRule):
     previous_nodes = models.ManyToManyField(GameFlowNode)
 
     def lock_game(self,gf_status):
-        status_nodes = GameFlowNodeStatus.objects.filter(game_flow_status=gf_status)
+        status_nodes = GameFlowNodeStatus.objects.filter(gameflow_status=gf_status)
         lock = False
         for n in self.previous_nodes.all():
             st_node = status_nodes.get(node=n)
@@ -66,23 +67,27 @@ class GameFlowRule_GamePartialCompletionDep(GameFlowRule):
     previous_nodes = models.ManyToManyField(GameFlowNode)
 
     def lock_game(self,gf_status):
-        status_nodes = GameFlowNodeStatus.objects.filter(game_flow_status=gf_status)
+        status_nodes = GameFlowNodeStatus.objects.filter(gameflow_status=gf_status)
         #print "\n -------------------- ", status_nodes
         lock = False
         for n in self.previous_nodes.all():
-            st_node = status_nodes.get(node=n)
-            lock = lock or not (st_node.completion > self.completion_threshold)
+            try:
+                st_node = status_nodes.get(node=n)
+                lock = lock or not (st_node.completion > self.completion_threshold)
+            except ObjectDoesNotExist:
+                lock = True
+    
             #print "\n -------------------- ", st_node.completion, " > ", self.completion_threshold
         return lock
 
 class GameFlow(models.Model):
     
-    def list_games_per_skill(self, game_flow_status):       
+    def list_games_per_skill(self, gameflow_status):       
         level_map = {}
-        for n in GameFlowNode.objects.filter(game_flow=self):
+        for n in GameFlowNode.objects.filter(gameflow=self):
             enabled = True
-            if game_flow_status is not None:
-                enabled = n.is_enabled(game_flow_status)
+            if gameflow_status is not None:
+                enabled = n.is_enabled(gameflow_status)
                 
             if n.skill_level in level_map:
                 level_map[n.skill_level].append((n,enabled))
@@ -99,7 +104,7 @@ class GameFlowStatus(models.Model):
     total_sessions = models.IntegerField(default=0)    
 
 class GameFlowNodeStatus(models.Model):
-    game_flow_status = models.ForeignKey(GameFlowStatus)
+    gameflow_status = models.ForeignKey(GameFlowStatus)
     node = models.ForeignKey(GameFlowNode)
     game_finished = models.BooleanField(default=False)
     completion = models.IntegerField(default=0)

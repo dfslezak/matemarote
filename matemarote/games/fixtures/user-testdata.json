@@ -20,7 +20,7 @@
     "model": "users.Program",
     "pk": 1,
     "fields": {
-      "game_flow": 1
+      "gameflow": 1
     }
   },
 
@@ -36,7 +36,7 @@
       "siblingorder": 0,
       "avatar": null,
       "program": 1,
-      "game_flow_status": 1
+      "gameflow_status": 1
     }
   }
 ]

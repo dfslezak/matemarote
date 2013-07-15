@@ -1,0 +1,87 @@
+[
+  {
+    "model": "games.Game",
+    "pk": 1,
+    "fields": {
+        "name": "avioncito", 
+        "description": "test_game1_description"}
+  },
+  {
+    "model": "games.Game",
+    "pk": 2,
+    "fields": {
+        "name": "memomarote", 
+        "description": "test_game2_description"}
+  },
+  {
+    "model": "games.Game",
+    "pk": 3,
+    "fields": {
+        "name": "casitas", 
+        "description": "test_game3_description"}
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 1,
+    "fields": {
+      "game": 1,
+      "version": "1.0.5.1",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 2,
+    "fields": {
+      "game": 2,
+      "version": "1.0.5.1",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 3,
+    "fields": {
+      "game": 3,
+      "version": "1.0.5.1",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": null
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 4,
+    "fields": {
+      "game": 1,
+      "version": "1.0.5.2",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": 1
+    }
+  },
+  {
+    "model": "games.GameRevision",
+    "pk": 5,
+    "fields": {
+      "game": 3,
+      "version": "1.0.5.2",
+      "creation_date": "1900-01-01 00:00-0300",
+      "previous_version": 2
+    }
+  },
+  
+  { "model": "games.GameRevision", "pk": 6, "fields": { "game": 1, "version": "1.0.3.1", "creation_date": "1900-01-01 00:00-0300", "previous_version": null } },
+  { "model": "games.GameRevision", "pk": 7, "fields": { "game": 3, "version": "1.0.3.1", "creation_date": "1900-01-01 00:00-0300", "previous_version": null } },
+  { "model": "games.GameRevision", "pk": 8, "fields": { "game": 2, "version": "1.0.3.1", "creation_date": "1900-01-01 00:00-0300", "previous_version": null } },
+  { "model": "games.GameRevision", "pk": 9, "fields": { "game": 1, "version": "1.0.3.2", "creation_date": "1900-01-01 00:00-0300", "previous_version": 6 } },
+  { "model": "games.GameRevision", "pk": 10, "fields": { "game": 3, "version": "1.0.3.2", "creation_date": "1900-01-01 00:00-0300", "previous_version": 7 } },
+
+  { "model": "games.GameRevision", "pk": 11, "fields": { "game": 3, "version": "1.0.4.1", "creation_date": "1900-01-01 00:00-0300", "previous_version": null } },
+  { "model": "games.GameRevision", "pk": 12, "fields": { "game": 1, "version": "1.0.4.1", "creation_date": "1900-01-01 00:00-0300", "previous_version": null } },
+  { "model": "games.GameRevision", "pk": 13, "fields": { "game": 2, "version": "1.0.4.1", "creation_date": "1900-01-01 00:00-0300", "previous_version": null } },
+  { "model": "games.GameRevision", "pk": 14, "fields": { "game": 1, "version": "1.0.4.2", "creation_date": "1900-01-01 00:00-0300", "previous_version": 12 } },
+  { "model": "games.GameRevision", "pk": 15, "fields": { "game": 3, "version": "1.0.4.2", "creation_date": "1900-01-01 00:00-0300", "previous_version": 11 } },  
+  { "model": "games.GameRevision", "pk": 16, "fields": { "game": 1, "version": "1.0.4.4", "creation_date": "1900-01-01 00:00-0300", "previous_version": 14 } }
+  
+]

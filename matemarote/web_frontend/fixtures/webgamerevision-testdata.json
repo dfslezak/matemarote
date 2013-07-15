@@ -3,7 +3,7 @@
     "model": "web_frontend.WebGameFlowNode",
     "pk": 1,
     "fields": {
-      "game_flow_node": 1,
+      "gameflow_node": 1,
       "created": "1970-01-01",
       "display_name": "Avioncito",
       "tooltip_description": "Tooltip description 1"
@@ -13,7 +13,7 @@
     "model": "web_frontend.WebGameFlowNode",
     "pk": 2,
     "fields": {
-      "game_flow_node": 2,
+      "gameflow_node": 2,
       "created": "1970-01-01",
       "display_name": "Test Game 2",
       "tooltip_description": "Tooltip description 2"

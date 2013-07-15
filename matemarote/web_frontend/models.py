@@ -43,20 +43,20 @@ class GameRevisionWebPackage(models.Model):
         return all_present
 
 class WebGameFlowNode(models.Model):
-    game_flow_node = models.OneToOneField(GameFlowNode)
+    gameflow_node = models.OneToOneField(GameFlowNode)
     created = models.DateTimeField(auto_now_add=True)
     
     display_name = models.CharField(max_length=255)
     tooltip_description = models.TextField()
     
-    def get_tooltip(self,game_flow_status):
+    def get_tooltip(self,gameflow_status):
         tooltip =  TOOLTIP_TEMPLATE % (self.display_name, self.tooltip_description)
         
         return tooltip
         
     @property
     def static_dir(self):
-        return GameRevisionWebPackage.static_dir(self.game_flow_node.game_revision)
+        return GameRevisionWebPackage.static_dir(self.gameflow_node.game_revision)
     
     @property
     def resource_path(self):

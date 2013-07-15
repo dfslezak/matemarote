@@ -1,0 +1,322 @@
+[
+  {
+    "model": "auth.User",
+    "pk": 1,
+    "fields": {
+        "username": "dfslezak", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$gpeOyJ12QxXR$ppdwhBP3iDMXu4S1CmOD41zlqrUPvwZmzp8lYcAtxhg=", 
+        "email": "", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "birthdate": "1900-1-1",
+      "gender": 1,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null
+    }
+  },
+  
+  {
+    "model": "auth.User",
+    "pk": 2,
+    "fields": {
+        "username": "Juan", 
+        "first_name": "Juan", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$yf6sdvEAXLB3$Gdr93ATgXkcYLicfJuHfbR2YjUKRKlxAOgtobhRR134=", 
+        "email": "juan@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "birthdate": "2004-08-31",
+      "gender": 1,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null, 
+      "program": 5,
+      "gameflow_status": 2
+    }
+  },
+
+  {
+    "model": "auth.User",
+    "pk": 3,
+    "fields": {
+        "username": "Paula", 
+        "first_name": "Paula", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$t1mejJLtleWD$XNWkpryNRgkbOw3S4k6VNlUvEr5v7x+9Ad5roSffJrE=", 
+        "email": "paula@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "birthdate": "2005-05-25",
+      "gender": 2,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 5,
+      "gameflow_status": 3
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 4,
+    "fields": {
+        "username": "Micaela", 
+        "first_name": "Micaela", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$ds1bLS4Jg4lO$f6cc+WBOVWX36zRHZHXo5JdgqMIiBO/et23EwxjV8Hk=", 
+        "email": "micaela@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "birthdate": "2004-07-01",
+      "gender": 2,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 5,
+      "gameflow_status": 4
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 5,
+    "fields": {
+        "username": "Lucas", 
+        "first_name": "Lucas", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$24Dn3wDnvnhU$PGVzQzHAk7ZvPWEQNialgR7uqAepbcNNwW1X+HQrZoo=", 
+        "email": "lucas@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 5,
+    "fields": {
+      "user": 5,
+      "birthdate": "2003-09-17",
+      "gender": 1,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 5,
+      "gameflow_status": 5
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 6,
+    "fields": {
+        "username": "Luciano", 
+        "first_name": "Luciano", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$u92RYL8uV0eE$P+hA2/eTjhffOoDoeEE73wgekdfTnU4dg4GZ9PsSPEM=", 
+        "email": "luciano@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 6,
+    "fields": {
+      "user": 6,
+      "birthdate": "2005-10-29",
+      "gender": 1,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 3,
+      "gameflow_status": 6
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 7,
+    "fields": {
+        "username": "Barbara", 
+        "first_name": "Barbara", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$IRFa4e14fS8I$2HmUZqQ9xrZKW7o5rqE/CWAw+iWicumuhqT0/RZrPus=", 
+        "email": "barbara@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "birthdate": "2005-10-20",
+      "gender": 2,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 3,
+      "gameflow_status": 7
+    }
+  },
+    {
+    "model": "auth.User",
+    "pk": 8,
+    "fields": {
+        "username": "Facundo", 
+        "first_name": "Facundo", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$ioRTaIEBVh6R$2xuaDMXE5SMM+Tw7WlBJtqQx+Nq8B6igX9qnamVl2Mg=", 
+        "email": "facundo@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 8,
+    "fields": {
+      "user": 8,
+      "birthdate": "2005-09-03",
+      "gender": 1,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 4,
+      "gameflow_status": 8
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 9,
+    "fields": {
+        "username": "Vera", 
+        "first_name": "Vera", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$td0nD0UtCCIS$QjCm0XUMp07eurSp1/BmnvfKjBzFzp14fKWKcUEPQgU=", 
+        "email": "vera@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 9,
+    "fields": {
+      "user": 9,
+      "birthdate": "2006-02-03",
+      "gender": 2,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 4,
+      "gameflow_status": 9
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 10,
+    "fields": {
+        "username": "Juana", 
+        "first_name": "Juana", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-04-19T15:58:50.723Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$ZGZgdbadarNA$5Hh86KXeDEsVqPIXTVP4MoFViuEqKG3AObUmRJLw+YA=", 
+        "email": "barbara@matemarote.com.ar", 
+        "date_joined": "2013-04-19T15:58:50.723Z"}
+  },
+  {
+    "model": "users.UserProfile",
+    "pk": 10,
+    "fields": {
+      "user": 10,
+      "birthdate": "2005-09-03",
+      "gender": 2,
+      "handedness": 2,
+      "siblingnumber": 0,
+      "siblingorder": 0,
+      "avatar": null,
+      "program": 4,
+      "gameflow_status": 10
+    }
+  }
+]

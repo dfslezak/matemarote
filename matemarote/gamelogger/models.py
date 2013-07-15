@@ -5,7 +5,7 @@ import json
 
 class PlaySession(models.Model):
     user = models.ForeignKey(User)
-    game_flow_node = models.ForeignKey(GameFlowNode)
+    gameflow_node = models.ForeignKey(GameFlowNode)
     ip = models.IPAddressField()
     timestamp = models.DateTimeField(auto_now=True)
     

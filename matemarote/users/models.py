@@ -7,9 +7,6 @@ from games.models import GameFlow,GameFlowStatus
 from django.db.models.signals import post_save
 from django.contrib.admin.widgets import AdminDateWidget
 from django.forms.extras.widgets import SelectDateWidget
-
-class Program(models.Model):
-    game_flow = models.ForeignKey(GameFlow)
     
 # Create your models here.
 class UserProfile(models.Model):
@@ -24,19 +21,19 @@ class UserProfile(models.Model):
     avatar = models.ImageField(_("Avatar"),upload_to='avatares',null=True,blank=True);
 
     program = models.ForeignKey('Program',default=1)
-    game_flow_status = models.ForeignKey(GameFlowStatus,null=True)
+    gameflow_status = models.ForeignKey(GameFlowStatus,null=True)
     
     def get_gameflow(self):
-        return self.program.game_flow
+        return self.program.gameflow
 
 class Program(models.Model):
     name = models.CharField(max_length=150)
     #language = models.SmallIntegerField(_("Language"),choices=[(1,_("Spanish")),(2,_("English"))])
-    language = models.CharField(choices=LANGUAGES)
+    language = models.CharField(max_length=5,choices=LANGUAGES)
     parent = models.ForeignKey('self', null=True)
     entry_url = models.CharField(max_length=150)
     
-    gameflow = models.ForeignKey('GameFlow', null=True)
+    gameflow = models.ForeignKey(GameFlow, null=True)
 
 class UserProfileForm(ModelForm):
     class Meta:
