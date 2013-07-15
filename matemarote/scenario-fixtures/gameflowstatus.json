@@ -5,7 +5,7 @@
     "fields": {
         "user": 2,
         "total_time_played": 30.0,
-        "last_play_timestamp": "2013-06-10",
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
         "last_play_totaltime": 30.0,
         "total_sessions": 1
     }
@@ -19,18 +19,19 @@
         "game_finished": "False",
         "completion": 100,
         "total_time_played": 30.0,
-        "last_play_timestamp": "2013-06-10",
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
         "last_play_totaltime": 30.0,
         "total_sessions": 1
     }
   },
+  
   {
     "model": "games.GameFlowStatus",
     "pk": 3,
     "fields": {
         "user": 3,
         "total_time_played": 31.0,
-        "last_play_timestamp": "2013-06-11",
+        "last_play_timestamp": "2013-06-11T13:20:30+03:00",
         "last_play_totaltime": 31.0,
         "total_sessions": 1
     }
@@ -44,7 +45,7 @@
         "game_finished": "False",
         "completion": 90,
         "total_time_played": 30.0,
-        "last_play_timestamp": "2013-06-10",
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
         "last_play_totaltime": 30.0,
         "total_sessions": 1
     }
@@ -58,10 +59,174 @@
         "game_finished": "False",
         "completion": 100,
         "total_time_played": 30.0,
-        "last_play_timestamp": "2013-06-10",
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
         "last_play_totaltime": 30.0,
         "total_sessions": 1
     }
-  }
-   
-]
+  },
+  
+    {
+    "model": "games.GameFlowStatus",
+    "pk": 4,
+    "fields": {
+        "user": 4,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },
+  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 4,
+    "fields": {
+        "gameflow_status": 4,
+        "node": 1,
+        "game_finished": "False",
+        "completion": 91,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },  
+  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 5,
+    "fields": {
+        "gameflow_status": 4,
+        "node": 2,
+        "game_finished": "False",
+        "completion": 100,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 6,
+    "fields": {
+        "gameflow_status": 4,
+        "node": 3,
+        "game_finished": "False",
+        "completion": 91,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },
+  
+  
+  {
+    "model": "games.GameFlowStatus",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },
+  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 7,
+    "fields": {
+        "gameflow_status": 5,
+        "node": 1,
+        "game_finished": "False",
+        "completion": 95,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },  
+  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 8,
+    "fields": {
+        "gameflow_status": 5,
+        "node": 2,
+        "game_finished": "False",
+        "completion": 95,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 9,
+    "fields": {
+        "gameflow_status": 5,
+        "node": 3,
+        "game_finished": "False",
+        "completion": 95,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 10,
+    "fields": {
+        "gameflow_status": 5,
+        "node": 4,
+        "game_finished": "False",
+        "completion": 95,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },  {
+    "model": "games.GameFlowNodeStatus",
+    "pk": 11,
+    "fields": {
+        "gameflow_status": 5,
+        "node": 5,
+        "game_finished": "False",
+        "completion": 95,
+        "total_time_played": 30.0,
+        "last_play_timestamp": "2013-06-10T13:20:30+03:00",
+        "last_play_totaltime": 30.0,
+        "total_sessions": 1
+    }
+  },
+  
+  
+  { "model": "games.GameFlowStatus", "pk": 6, "fields": { "user": 6, "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } }, 
+  { "model": "games.GameFlowNodeStatus", "pk": 12, "fields": { "gameflow_status": 6, "node": 6, "game_finished": "False", "completion": 10, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+
+  { "model": "games.GameFlowStatus", "pk": 7, "fields": { "user": 7, "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } }, 
+  { "model": "games.GameFlowNodeStatus", "pk": 13, "fields": { "gameflow_status": 7, "node": 6, "game_finished": "False", "completion": 100, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 14, "fields": { "gameflow_status": 7, "node": 7, "game_finished": "False", "completion": 55, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+	      
+  { "model": "games.GameFlowStatus", "pk": 8, "fields": { "user": 8, "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 15, "fields": { "gameflow_status": 8, "node": 11, "game_finished": "False", "completion": 100, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 16, "fields": { "gameflow_status": 8, "node": 12, "game_finished": "False", "completion": 55, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+	      
+  { "model": "games.GameFlowStatus", "pk": 9, "fields": { "user": 9, "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 17, "fields": { "gameflow_status": 9, "node": 11, "game_finished": "False", "completion": 80, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 18, "fields": { "gameflow_status": 9, "node": 12, "game_finished": "False", "completion": 30, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+	      
+  { "model": "games.GameFlowStatus", "pk": 10, "fields": { "user": 10, "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 19, "fields": { "gameflow_status": 10, "node": 11, "game_finished": "False", "completion": 100, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 20, "fields": { "gameflow_status": 10, "node": 12, "game_finished": "False", "completion": 60, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } },
+  { "model": "games.GameFlowNodeStatus", "pk": 21, "fields": { "gameflow_status": 10, "node": 13, "game_finished": "False", "completion": 30, 
+	      "total_time_played": 30.0, "last_play_timestamp": "2013-06-10T13:20:30+03:00", "last_play_totaltime": 30.0, "total_sessions": 1 } }
+
+  ]

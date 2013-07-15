@@ -6,20 +6,6 @@
     }
   },
   {
-    "model": "games.GameFlow",
-    "pk": 2,
-    "fields": {
-    }
-  },
-  {
-    "model": "games.GameFlow",
-    "pk": 3,
-    "fields": {
-    }
-  },
-
-
-  {
     "model": "games.GameFlowNode",
     "pk": 1,
     "fields": {
@@ -105,5 +91,59 @@
         "completion_threshold": 0,
         "previous_nodes": [4]
     }
-  }
+  },
+  
+  
+  
+  
+  {
+    "model": "games.GameFlow",
+    "pk": 2,
+    "fields": {
+    }
+  },
+  { "model": "games.GameFlowNode", "pk": 6, "fields": { "gameflow": 2, "game_revision": 6,  "skill_level": 1}},
+  { "model": "games.GameFlowNode", "pk": 7, "fields": { "gameflow": 2, "game_revision": 7,  "skill_level": 2}},
+  { "model": "games.GameFlowNode", "pk": 8, "fields": { "gameflow": 2, "game_revision": 8,  "skill_level": 2}},
+  { "model": "games.GameFlowNode", "pk": 9, "fields": { "gameflow": 2, "game_revision": 9,  "skill_level": 3}},
+  { "model": "games.GameFlowNode", "pk": 10, "fields": { "gameflow": 2, "game_revision": 10,  "skill_level": 4}},
+      
+  {"pk": 6, "model": "games.gameflowrule", "fields": {"gameflow_node": 7}}, 
+  {"pk": 7, "model": "games.gameflowrule", "fields": {"gameflow_node": 8}}, 
+  {"pk": 8, "model": "games.gameflowrule", "fields": {"gameflow_node": 9}}, 
+  {"pk": 9, "model": "games.gameflowrule", "fields": {"gameflow_node":10}}, 
+  
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 6, "fields": { "completion_threshold": 60, "previous_nodes": [6] } },
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 7, "fields": { "completion_threshold": 50, "previous_nodes": [6, 7] } },
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 8, "fields": { "completion_threshold": 90, "previous_nodes": [6,7,8] } },
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 9, "fields": { "completion_threshold": 0, "previous_nodes": [9] } },  
+  
+  
+  
+  
+  
+  {
+    "model": "games.GameFlow",
+    "pk": 3,
+    "fields": {
+    }
+  },
+  { "model": "games.GameFlowNode", "pk": 11, "fields": { "gameflow": 3, "game_revision": 11,  "skill_level": 1}},
+  { "model": "games.GameFlowNode", "pk": 12, "fields": { "gameflow": 3, "game_revision": 12,  "skill_level": 2}},
+  { "model": "games.GameFlowNode", "pk": 13, "fields": { "gameflow": 3, "game_revision": 13,  "skill_level": 3}},
+  { "model": "games.GameFlowNode", "pk": 14, "fields": { "gameflow": 3, "game_revision": 14,  "skill_level": 3}},
+  { "model": "games.GameFlowNode", "pk": 15, "fields": { "gameflow": 3, "game_revision": 15,  "skill_level": 4}},
+  { "model": "games.GameFlowNode", "pk": 16, "fields": { "gameflow": 3, "game_revision": 16,  "skill_level": 4}},
+
+  {"pk": 11, "model": "games.gameflowrule", "fields": {"gameflow_node":12}}, 
+  {"pk": 12, "model": "games.gameflowrule", "fields": {"gameflow_node":13}}, 
+  {"pk": 13, "model": "games.gameflowrule", "fields": {"gameflow_node":14}}, 
+  {"pk": 14, "model": "games.gameflowrule", "fields": {"gameflow_node":15}},
+  {"pk": 15, "model": "games.gameflowrule", "fields": {"gameflow_node":16}},   
+
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 11, "fields": { "completion_threshold": 20, "previous_nodes": [11] } },
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 12, "fields": { "completion_threshold": 50, "previous_nodes": [11, 12] } },
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 13, "fields": { "completion_threshold": 90, "previous_nodes": [11,12,13] } },
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 14, "fields": { "completion_threshold": 0, "previous_nodes": [14] } },    
+ { "model": "games.GameFlowRule_GamePartialCompletionDep", "pk": 15, "fields": { "completion_threshold": 90, "previous_nodes": [11,12,13,14,15] } }
 ]

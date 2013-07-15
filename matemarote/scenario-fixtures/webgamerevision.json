@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "gameflow_node": 1,
-      "created": "1970-01-01",
+      "created": "2011-09-01T13:20:30+03:00",
       "display_name": "Avioncito",
       "tooltip_description": "Sólo avioncitos amarillos 50% y 50%"
     }
@@ -14,8 +14,8 @@
     "pk": 2,
     "fields": {
       "gameflow_node": 2,
-      "created": "1970-01-01",
-      "display_name": "Memo Marote",
+      "created": "2011-09-01T13:20:30+03:00",
+      "display_name": "Memomarote",
       "tooltip_description": "Tableros de 3, 4 y 5 fichas"
     }
   },
@@ -24,7 +24,7 @@
     "pk": 3,
     "fields": {
       "gameflow_node": 3,
-      "created": "1970-01-01",
+      "created": "2011-09-01T13:20:30+03:00",
       "display_name": "Casitas",
       "tooltip_description": "Niveles de 3, 4 y 5 movimientos con movimientos restringidos"
     }
@@ -34,7 +34,7 @@
     "pk": 4,
     "fields": {
       "gameflow_node": 4,
-      "created": "1970-01-01",
+      "created": "2011-09-01T13:20:30+03:00",
       "display_name": "Avioncito",
       "tooltip_description": "Un nivel de 20 avioncitos, rojos y amarillos en igual proporción"
     }
@@ -44,9 +44,24 @@
     "pk": 5,
     "fields": {
       "gameflow_node": 5,
-      "created": "1970-01-01",
+      "created": "2011-09-01T13:20:30+03:00",
       "display_name": "Casitas",
       "tooltip_description": "Niveles de 6 y 7 movimientos con movimientos restringidos"
     }
-  }
+  },
+  
+  
+ { "model": "web_frontend.WebGameFlowNode", "pk": 6 , "fields": { "gameflow_node": 6, "created": "2011-09-01T13:20:30+03:00", "display_name": "Avioncito", "tooltip_description": "Sólo avioncitos amarillos 50% y 50%" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 7 , "fields": { "gameflow_node": 7, "created": "2011-09-01T13:20:30+03:00", "display_name": "Casitas", "tooltip_description": "Niveles de 3, 4 y 5 movimientos con movimientos restringidos" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 8 , "fields": { "gameflow_node": 8, "created": "2011-09-01T13:20:30+03:00", "display_name": "Memomarote", "tooltip_description": "Tableros de 3, 4 y 5 fichas" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 9 , "fields": { "gameflow_node": 9, "created": "2011-09-01T13:20:30+03:00", "display_name": "Avioncito", "tooltip_description": "Un nivel de 20 avioncitos, rojos y amarillos en igual proporción" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 10, "fields": { "gameflow_node":10, "created": "2011-09-01T13:20:30+03:00", "display_name": "Casitas", "tooltip_description": "Niveles de 6 y 7 movimientos con movimientos restringidos" } } ,
+
+ { "model": "web_frontend.WebGameFlowNode", "pk": 11, "fields": { "gameflow_node":11, "created": "2011-09-01T13:20:30+03:00", "display_name": "Casitas", "tooltip_description": "Niveles de 3, 4 y 5 movimientos con movimientos restringidos" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 12, "fields": { "gameflow_node":12, "created": "2011-09-01T13:20:30+03:00", "display_name": "Avioncito", "tooltip_description": "Sólo avioncitos amarillos 50% y 50%" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 13, "fields": { "gameflow_node":13, "created": "2011-09-01T13:20:30+03:00", "display_name": "Memomarote", "tooltip_description": "Tableros de 3, 4 y 5 fichas" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 14, "fields": { "gameflow_node":14, "created": "2011-09-01T13:20:30+03:00", "display_name": "Avioncito", "tooltip_description": "Un nivel de 20 avioncitos, rojos y amarillos en igual proporción" } },
+ { "model": "web_frontend.WebGameFlowNode", "pk": 15, "fields": { "gameflow_node":15, "created": "2011-09-01T13:20:30+03:00", "display_name": "Casitas", "tooltip_description": "Niveles de 6 y 7 movimientos con movimientos restringidos" } } ,
+ { "model": "web_frontend.WebGameFlowNode", "pk": 16, "fields": { "gameflow_node":16, "created": "2011-09-01T13:20:30+03:00", "display_name": "Avioncito", "tooltip_description": "Un nivel de 40 avioncitos, rojos y amarillos en igual proporción" } } 
+ 
 ]
